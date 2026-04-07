@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思考書き換え100フレーズ集｜購入者限定特典</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1a1a2e;
+    --accent: #4a6fa5;
+    --accent-light: #e8f0fb;
+    --accent-mid: #c5d8f5;
+    --a-color: #3a86b0;
+    --a-bg: #e8f4f8;
+    --a-border: #a8d4e6;
+    --b-color: #c9860a;
+    --b-bg: #fef9e7;
+    --b-border: #f0d070;
+    --c-color: #9b4da0;
+    --c-bg: #fdf2f8;
+    --c-border: #d7a8d0;
+    --before: #718096;
+    --after-a: #1a6a90;
+    --after-b: #a06010;
+    --after-c: #7a3080;
+    --gray: #f5f7fa;
+    --border: #dde3ec;
+    --text: #2d3748;
+    --text-light: #718096;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #f0f4f8;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  .wrapper { max-width: 720px; margin: 0 auto; }
+
+  .header {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 32px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--accent);
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .header p {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  .howto {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  /* タブ */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 2px solid var(--border);
+    background: white;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-light);
+  }
+
+  .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .tab-btn.active-all { background: var(--accent); border-color: var(--accent); color: white; }
+  .tab-btn.active-a { background: var(--a-color); border-color: var(--a-color); color: white; }
+  .tab-btn.active-b { background: var(--b-color); border-color: var(--b-color); color: white; }
+  .tab-btn.active-c { background: var(--c-color); border-color: var(--c-color); color: white; }
+
+  /* 検索 */
+  .search-box {
+    background: white;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--dark);
+  }
+
+  .search-input::placeholder { color: #c0c8d4; }
+  .search-icon { color: var(--text-light); font-size: 16px; }
+  .search-count { font-size: 12px; color: var(--text-light); white-space: nowrap; }
+
+  /* セクション */
+  .section-block {
+    margin-bottom: 24px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 0;
+  }
+
+  .section-header.a { background: var(--a-bg); border: 1px solid var(--a-border); border-bottom: none; }
+  .section-header.b { background: var(--b-bg); border: 1px solid var(--b-border); border-bottom: none; }
+  .section-header.c { background: var(--c-bg); border: 1px solid var(--c-border); border-bottom: none; }
+
+  .section-badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .section-badge.a { background: var(--a-color); }
+  .section-badge.b { background: var(--b-color); }
+  .section-badge.c { background: var(--c-color); }
+
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .section-count-badge {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: white;
+  }
+
+  .section-count-badge.a { background: var(--a-color); }
+  .section-count-badge.b { background: var(--b-color); }
+  .section-count-badge.c { background: var(--c-color); }
+
+  /* フレーズリスト */
+  .phrase-list {
+    background: white;
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+  }
+
+  .phrase-list.a { border: 1px solid var(--a-border); border-top: none; }
+  .phrase-list.b { border: 1px solid var(--b-border); border-top: none; }
+  .phrase-list.c { border: 1px solid var(--c-border); border-top: none; }
+
+  .phrase-item {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .phrase-item:last-child { border-bottom: none; }
+  .phrase-item:hover { background: var(--gray); }
+  .phrase-item.hidden { display: none; }
+
+  .phrase-num {
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-light);
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    background: var(--gray);
+  }
+
+  .phrase-content {
+    flex: 1;
+    padding: 14px 16px;
+  }
+
+  .phrase-before {
+    font-size: 13px;
+    color: var(--before);
+    line-height: 1.6;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .phrase-before::before {
+    content: '✕';
+    font-size: 11px;
+    color: #e05050;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .phrase-after {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.65;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .phrase-after::before {
+    content: '◯';
+    font-size: 11px;
+    margin-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .phrase-after.a { color: var(--after-a); }
+  .phrase-after.b { color: var(--after-b); }
+  .phrase-after.c { color: var(--after-c); }
+
+  .phrase-after.a::before { color: var(--a-color); }
+  .phrase-after.b::before { color: var(--b-color); }
+  .phrase-after.c::before { color: var(--c-color); }
+
+  .fav-btn {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    flex-shrink: 0;
+    color: #c0c8d4;
+    transition: color 0.2s, transform 0.2s;
+    border-left: 1px solid var(--border);
+  }
+
+  .fav-btn:hover { transform: scale(1.2); }
+  .fav-btn.active { color: #e88c30; }
+
+  /* お気に入りセクション */
+  .fav-section {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
+  }
+
+  .fav-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .fav-count {
+    font-size: 12px;
+    background: var(--orange-bg, #fef3e6);
+    color: #c07830;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+
+  .fav-empty {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.7;
+    text-align: center;
+    padding: 12px 0;
+  }
+
+  .fav-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .fav-item {
+    background: var(--gray);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.65;
+    color: var(--dark);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .fav-item .fav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .fav-item .fav-dot.a { background: var(--a-color); }
+  .fav-item .fav-dot.b { background: var(--b-color); }
+  .fav-item .fav-dot.c { background: var(--c-color); }
+
+  .no-results {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-light);
+    font-size: 13.5px;
+    display: none;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 11.5px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 480px) {
+    .header { padding: 24px 20px; }
+    .header h1 { font-size: 20px; }
+    .phrase-num { width: 28px; font-size: 10px; }
+    .phrase-content { padding: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <div class="badge">購入者限定特典</div>
+    <h1>思考書き換え100フレーズ集</h1>
+    <p>よくある止まりパターン別に、即使える言葉を集めました。<br>ピンときたフレーズに★を付けて、自分専用のリストを作ってください。</p>
+    <div class="howto">
+      💡 ★ボタンでお気に入り登録できます。行動する前に自分の★リストを見返す使い方がおすすめです。
+    </div>
+  </div>
+
+  <!-- お気に入り -->
+  <div class="fav-section">
+    <h2>⭐ マイフレーズリスト <span class="fav-count" id="fav-count">0個</span></h2>
+    <div class="fav-empty" id="fav-empty">★を押したフレーズがここに表示されます。<br>行動前に見返すリストとして使ってください。</div>
+    <div class="fav-list" id="fav-list"></div>
+  </div>
+
+  <!-- タブ -->
+  <div class="tabs">
+    <button class="tab-btn active-all" onclick="filterTab('all', this)">すべて（100）</button>
+    <button class="tab-btn" onclick="filterTab('a', this)">A：完璧主義（34）</button>
+    <button class="tab-btn" onclick="filterTab('b', this)">B：義務感（33）</button>
+    <button class="tab-btn" onclick="filterTab('c', this)">C：自己否定（33）</button>
+  </div>
+
+  <!-- 検索 -->
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="text" placeholder="キーワードで検索（例：完璧、続かない）" oninput="searchPhrases(this.value)" />
+    <span class="search-count" id="search-count">100件</span>
+  </div>
+
+  <div id="no-results" class="no-results">該当するフレーズが見つかりませんでした。</div>
+
+  <!-- セクションA -->
+  <div class="section-block" id="block-a">
+    <div class="section-header a">
+      <div class="section-badge a">A</div>
+      <div class="section-title">完璧主義タイプの思考書き換え</div>
+      <div class="section-count-badge a">34フレーズ</div>
+    </div>
+    <div class="phrase-list a" id="list-a"></div>
+  </div>
+
+  <!-- セクションB -->
+  <div class="section-block" id="block-b">
+    <div class="section-header b">
+      <div class="section-badge b">B</div>
+      <div class="section-title">義務感タイプの思考書き換え</div>
+      <div class="section-count-badge b">33フレーズ</div>
+    </div>
+    <div class="phrase-list b" id="list-b"></div>
+  </div>
+
+  <!-- セクションC -->
+  <div class="section-block" id="block-c">
+    <div class="section-header c">
+      <div class="section-badge c">C</div>
+      <div class="section-title">自己否定タイプの思考書き換え</div>
+      <div class="section-count-badge c">33フレーズ</div>
+    </div>
+    <div class="phrase-list c" id="list-c"></div>
+  </div>
+
+  <div class="footer">
+    ピンときたフレーズを★に登録して、行動前に見返してください。<br>
+    思考が軽くなったら、5分だけ動いてみてください。
+  </div>
+
+</div>
+
+<script>
+const phrases = {
+  a: [
+    { before: "ちゃんとやらないと意味がない", after: "雑でいい。まず存在させることが大事" },
+    { before: "正解が分からないと動けない", after: "動きながら正解に近づけばいい" },
+    { before: "完璧な状態になってから出す", after: "60点で出して、後から直せばいい" },
+    { before: "中途半端に終わりたくない", after: "中途半端でも、ゼロよりずっといい" },
+    { before: "もっと準備してからにしよう", after: "準備は動きながらできる" },
+    { before: "クオリティが低いものは出せない", after: "今の自分の100点を出すだけでいい" },
+    { before: "誰かにダメと思われたらどうしよう", after: "見てもらわないと何も始まらない" },
+    { before: "もっと知識をつけてから動く", after: "知識は動きながらでも増やせる" },
+    { before: "全部見えてから動こうと思う", after: "1歩目だけ見えていれば十分" },
+    { before: "こんな内容では恥ずかしい", after: "最初は誰でも恥ずかしいものを出している" },
+    { before: "もっといいアイデアが浮かんでから", after: "今のアイデアで動いていい。後で変えればいい" },
+    { before: "完璧なタイトルを考えてから書く", after: "タイトルは後で直せる。まず1行目を書く" },
+    { before: "プロっぽくないと意味がない", after: "プロらしさより、届けることの方が大事" },
+    { before: "構成が固まってから書き始める", after: "書きながら構成は決まっていく" },
+    { before: "これくらいの量では短すぎる", after: "短くてもちゃんと伝わるものの方が読まれる" },
+    { before: "他の人の方がうまく書いている", after: "自分の言葉でしか届かない人がいる" },
+    { before: "完璧な仕組みができてから始める", after: "仕組みは動かしながら作るもの" },
+    { before: "もう少しリサーチしてから", after: "リサーチは30分まで。あとは動く" },
+    { before: "全部できるようになってからやる", after: "今できる1つだけをやればいい" },
+    { before: "失敗したくないから慎重にやる", after: "失敗は情報。動かないことの方が損" },
+    { before: "もっといい方法があるはずだから探す", after: "今の方法で動いた方が答えは早く出る" },
+    { before: "完璧な計画を立ててから動く", after: "計画は1行で十分。あとは動いて修正" },
+    { before: "自分の実力ではまだ早い", after: "実力は動いた後でしかつかない" },
+    { before: "レベルの高いものを最初から出したい", after: "レベルは積み重ねた先にある" },
+    { before: "誰かに添削してもらってから出す", after: "出してからフィードバックをもらう方が早い" },
+    { before: "もっと面白い切り口を見つけてから", after: "今思いついた切り口で動いていい" },
+    { before: "書き直しが必要だから出せない", after: "出してから書き直せばいい" },
+    { before: "競合に勝てるものじゃないと意味がない", after: "100人に1人に届けばいい" },
+    { before: "もっと実績を積んでから発信する", after: "発信することで実績が積み上がる" },
+    { before: "今のままでは見せられるレベルじゃない", after: "見せられるレベルは動いた先にある" },
+    { before: "完成度が低いと批判されそう", after: "批判より無視の方が多い。まず出すことが大事" },
+    { before: "ちゃんとした見た目にしてから公開する", after: "中身が伝わればデザインは後からでいい" },
+    { before: "完璧にやるか、やらないかのどちらかだ", after: "1%やることの方が0よりはるかにいい" },
+    { before: "もっと時間をかけないといいものにならない", after: "時間より回数。短くてもいいから続ける" },
+  ],
+  b: [
+    { before: "やらなきゃいけない", after: "やってもいい" },
+    { before: "やるべきだ", after: "やりたいからやる" },
+    { before: "やらないとダメだ", after: "やれたら十分" },
+    { before: "今日中にやらなきゃ", after: "今日1分だけやってもいい" },
+    { before: "毎日続けなきゃいけない", after: "今日1回やれたらOK" },
+    { before: "結果を出さなきゃいけない", after: "動いた事実だけを見る" },
+    { before: "人より先に進まなきゃ", after: "昨日の自分より1ミリ動けばいい" },
+    { before: "もっと頑張らなきゃ", after: "今の自分のペースでいい" },
+    { before: "早くやらなきゃ遅れる", after: "今日動けばそれが一番早い" },
+    { before: "サボったら終わりだ", after: "再開すれば続いていることになる" },
+    { before: "強制的にでもやらなきゃ", after: "やりたくなる状態を先に作る" },
+    { before: "意志の力でやり切らなきゃ", after: "仕組みに任せれば意志はいらない" },
+    { before: "モチベーションを上げなきゃ", after: "モチベーションは行動の後についてくる" },
+    { before: "気合いを入れてやらなきゃ", after: "気合いがなくてもできる量に設定する" },
+    { before: "やらない自分はダメだ", after: "やろうとしている自分はすでに動いている" },
+    { before: "义務としてこなさなきゃいけない", after: "選んでやっている、と言い換える" },
+    { before: "期限に間に合わせなきゃ", after: "今日できる1つだけに集中する" },
+    { before: "全部やり切らなきゃ意味がない", after: "1つできたことを認める" },
+    { before: "休んだら遅れる", after: "休むことも仕組みのうち" },
+    { before: "ちゃんとやれない自分が嫌だ", after: "ちゃんとやろうとしている自分は十分えらい" },
+    { before: "今日やらなかったら明日は2倍やらなきゃ", after: "明日は明日の1回だけでいい" },
+    { before: "やる気を出してからやらなきゃ", after: "やる気は動いた後に出てくる" },
+    { before: "自分に厳しくしないと成長しない", after: "続けることが一番の成長" },
+    { before: "サボった分を取り戻さなきゃ", after: "取り戻さなくていい。今日1回だけでいい" },
+    { before: "成果を出さなきゃ意味がない", after: "動いた回数が積み重なれば成果は後からくる" },
+    { before: "もっと長い時間やらなきゃ", after: "短くても毎日の方が長期では勝つ" },
+    { before: "集中しなきゃいけない", after: "5分だけ集中できれば十分" },
+    { before: "完全にやり切るまで休めない", after: "物足りないで終わることが続く秘訣" },
+    { before: "今やらないと一生できない", after: "今日1回やれば、それが始まり" },
+    { before: "誰かに認めてもらわなきゃ意味がない", after: "動いた自分が一番最初に認めてあげる" },
+    { before: "稼げなきゃやる意味がない", after: "まず動いた経験が資産になる" },
+    { before: "うまくいかなきゃ続けちゃいけない", after: "うまくいかない回数が増えるほど上手くなる" },
+    { before: "本気でやらなきゃ意味がない", after: "本気じゃなくていい。やった事実が大事" },
+  ],
+  c: [
+    { before: "どうせ続かない", after: "今日1回だけやって、どうなるか見てみる" },
+    { before: "自分には無理だ", after: "1回試してみるだけ。無理かどうかは動いてから分かる" },
+    { before: "今さら遅すぎる", after: "今日が一番早い日" },
+    { before: "どうせ誰にも読まれない", after: "1人に届けばそれでいい" },
+    { before: "自分には書けるネタがない", after: "今日感じたことが誰かにとってのネタになる" },
+    { before: "また失敗するに決まっている", after: "失敗は予測じゃなく、動いた後に分かること" },
+    { before: "才能がないから無理だ", after: "才能は関係ない。回数が実力になる" },
+    { before: "他の人の方が絶対うまい", after: "比べる相手は昨日の自分だけでいい" },
+    { before: "自分の経験なんて価値がない", after: "自分の経験は自分にしか語れない" },
+    { before: "うまくいく保証がないからやれない", after: "保証がなくても、動いた経験は残る" },
+    { before: "どうせまた三日坊主になる", after: "三日坊主でも、やった3日は積み上がっている" },
+    { before: "自分みたいな人間には向いていない", after: "向き不向きは動いた後に分かる" },
+    { before: "どうせうまくいかないから意味がない", after: "うまくいかなくても、次に活かせる経験が増える" },
+    { before: "自分にはセンスがない", after: "センスより量。量が増えればセンスも磨かれる" },
+    { before: "また同じことを繰り返すだけだ", after: "今回は仕組みが違う。同じじゃない" },
+    { before: "自分なんかがやっても仕方ない", after: "やらない理由にしているだけかもしれない" },
+    { before: "もう年齢的に遅い", after: "始めた日が一番若い日" },
+    { before: "どうせすぐ飽きる", after: "飽きる前にできることだけやればいい" },
+    { before: "自分には継続する力がない", after: "継続は力ではなく仕組みで作るもの" },
+    { before: "どうせ途中で諦める", after: "途中でやめても、やった分は残る" },
+    { before: "自分が発信しても誰も興味を持たない", after: "興味を持つかどうかは出してみないと分からない" },
+    { before: "失敗したら恥ずかしい", after: "誰も自分が思うほど見ていない" },
+    { before: "自分には特別なものが何もない", after: "特別でなくても、等身大の言葉は届く" },
+    { before: "どうせ結果が出ない", after: "結果が出るまでの回数が足りていないだけかもしれない" },
+    { before: "自分が言っても説得力がない", after: "経験談には、専門知識より説得力がある" },
+    { before: "また挫折するに決まっている", after: "今回は挫折の構造が分かっている。違う" },
+    { before: "自分には変われる気がしない", after: "変わろうとしている時点で、すでに動き始めている" },
+    { before: "どうせ大した成果にならない", after: "小さな成果が積み重なって大きくなる" },
+    { before: "自分みたいな人間が発信してもいいのか", after: "発信する資格は、誰かの役に立ちたいと思った瞬間にある" },
+    { before: "うまくいっている人と自分は違う", after: "うまくいっている人も最初は同じだった" },
+    { before: "自分の言葉は浅い", after: "浅くてもいい。届く人には届く" },
+    { before: "どうせ批判される", after: "批判されるのは、届いている証拠" },
+    { before: "自分は行動できない人間だと分かっている", after: "それは過去の解釈。今日動けば書き換わる" },
+  ]
+};
+
+let currentFilter = 'all';
+let currentSearch = '';
+const favorites = new Set();
+
+function renderAll() {
+  ['a','b','c'].forEach(type => {
+    const list = document.getElementById('list-' + type);
+    list.innerHTML = '';
+    phrases[type].forEach((p, i) => {
+      const globalNum = type === 'a' ? i+1 : type === 'b' ? i+35 : i+68;
+      const div = document.createElement('div');
+      div.className = 'phrase-item';
+      div.dataset.type = type;
+      div.dataset.before = p.before;
+      div.dataset.after = p.after;
+      div.dataset.id = globalNum;
+      div.innerHTML = `
+        <div class="phrase-num">${globalNum}</div>
+        <div class="phrase-content">
+          <div class="phrase-before">${p.before}</div>
+          <div class="phrase-after ${type}">${p.after}</div>
+        </div>
+        <button class="fav-btn" onclick="toggleFav(${globalNum}, '${type}', this)" title="お気に入りに追加">☆</button>
+      `;
+      list.appendChild(div);
+    });
+  });
+  updateCount();
+}
+
+function toggleFav(id, type, btn) {
+  if (favorites.has(id)) {
+    favorites.delete(id);
+    btn.classList.remove('active');
+    btn.textContent = '☆';
+  } else {
+    favorites.add(id);
+    btn.classList.add('active');
+    btn.textContent = '★';
+  }
+  renderFavList();
+}
+
+function renderFavList() {
+  const list = document.getElementById('fav-list');
+  const empty = document.getElementById('fav-empty');
+  const count = document.getElementById('fav-count');
+  count.textContent = favorites.size + '個';
+  list.innerHTML = '';
+  if (favorites.size === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  [...favorites].sort((a,b) => a-b).forEach(id => {
+    let type, phrase;
+    if (id <= 34) { type = 'a'; phrase = phrases.a[id-1]; }
+    else if (id <= 67) { type = 'b'; phrase = phrases.b[id-35]; }
+    else { type = 'c'; phrase = phrases.c[id-68]; }
+    const item = document.createElement('div');
+    item.className = 'fav-item';
+    item.innerHTML = `<div class="fav-dot ${type}"></div><div>${phrase.after}</div>`;
+    list.appendChild(item);
+  });
+}
+
+function filterTab(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll('.tab-btn').forEach(b => b.className = 'tab-btn');
+  btn.className = 'tab-btn active-' + type;
+  applyFilter();
+}
+
+function searchPhrases(val) {
+  currentSearch = val.toLowerCase();
+  applyFilter();
+}
+
+function applyFilter() {
+  let visible = 0;
+  document.querySelectorAll('.phrase-item').forEach(item => {
+    const type = item.dataset.type;
+    const before = item.dataset.before.toLowerCase();
+    const after = item.dataset.after.toLowerCase();
+    const matchType = currentFilter === 'all' || currentFilter === type;
+    const matchSearch = !currentSearch || before.includes(currentSearch) || after.includes(currentSearch);
+    if (matchType && matchSearch) {
+      item.classList.remove('hidden');
+      visible++;
+    } else {
+      item.classList.add('hidden');
+    }
+  });
+
+  // セクションブロックの表示制御
+  ['a','b','c'].forEach(type => {
+    const block = document.getElementById('block-' + type);
+    const hasVisible = block.querySelectorAll('.phrase-item:not(.hidden)').length > 0;
+    const matchFilter = currentFilter === 'all' || currentFilter === type;
+    block.style.display = (matchFilter && hasVisible) ? 'block' : 'none';
+  });
+
+  document.getElementById('search-count').textContent = visible + '件';
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+
+function updateCount() {
+  const total = Object.values(phrases).reduce((s, arr) => s + arr.length, 0);
+  document.getElementById('search-count').textContent = total + '件';
+}
+
+renderAll();
+</script>
+</body>
+</html>
