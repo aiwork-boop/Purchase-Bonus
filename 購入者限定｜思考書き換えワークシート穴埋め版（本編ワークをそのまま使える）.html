@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思考書き換えワークシート｜購入者限定特典</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1a1a2e;
+    --accent: #4a6fa5;
+    --accent-light: #e8f0fb;
+    --accent-mid: #c5d8f5;
+    --green: #2d8a60;
+    --green-bg: #eaf6f0;
+    --green-border: #a3d9bf;
+    --a-color: #3a86b0;
+    --a-bg: #e8f4f8;
+    --a-border: #a8d4e6;
+    --b-color: #c9860a;
+    --b-bg: #fef9e7;
+    --b-border: #f0d070;
+    --c-color: #9b4da0;
+    --c-bg: #fdf2f8;
+    --c-border: #d7a8d0;
+    --gray: #f5f7fa;
+    --border: #dde3ec;
+    --text: #2d3748;
+    --text-light: #718096;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: #f0f4f8; color: var(--text); min-height: 100vh; padding: 24px 16px 60px; }
+  .wrapper { max-width: 700px; margin: 0 auto; }
+  .header { background: white; border-radius: 16px; padding: 32px 32px 28px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-top: 4px solid var(--accent); }
+  .badge { display: inline-block; background: var(--accent-light); color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; }
+  .header h1 { font-family: 'Noto Serif JP', serif; font-size: 24px; font-weight: 700; color: var(--dark); line-height: 1.4; margin-bottom: 10px; }
+  .header p { font-size: 13.5px; color: var(--text-light); line-height: 1.75; }
+  .howto { background: var(--accent-light); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 12px 16px; margin-top: 16px; font-size: 13px; color: var(--accent); font-weight: 500; line-height: 1.6; }
+  .step-progress { background: white; border-radius: 14px; padding: 18px 24px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+  .step-dots { display: flex; align-items: center; }
+  .step-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; border: 2px solid var(--border); background: var(--gray); color: var(--text-light); flex-shrink: 0; transition: all 0.3s; }
+  .step-dot.active { background: var(--accent); border-color: var(--accent); color: white; }
+  .step-dot.done { background: var(--green); border-color: var(--green); color: white; }
+  .step-line { flex: 1; height: 2px; background: var(--border); transition: background 0.3s; }
+  .step-line.done { background: var(--green); }
+  .step-labels { display: flex; justify-content: space-between; margin-top: 8px; }
+  .step-label { font-size: 10px; color: var(--text-light); text-align: center; width: 32px; }
+  .step-label.active { color: var(--accent); font-weight: 700; }
+  .step-label.done { color: var(--green); font-weight: 700; }
+
+  /* 蓄積サマリーパネル */
+  .accumulate-panel { background: white; border-radius: 14px; padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-left: 4px solid var(--accent); display: none; }
+  .accumulate-panel.show { display: block; }
+  .accumulate-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 12px; }
+  .accum-rows { display: flex; flex-direction: column; gap: 7px; }
+  .accum-row { display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border-radius: 8px; background: var(--gray); }
+  .accum-label { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .accum-label.s1 { background: var(--accent-light); color: var(--accent); }
+  .accum-label.s2 { background: #f0e8f8; color: #7a4da0; }
+  .accum-label.s3a { background: var(--a-bg); color: var(--a-color); }
+  .accum-label.s3b { background: var(--b-bg); color: var(--b-color); }
+  .accum-label.s3c { background: var(--c-bg); color: var(--c-color); }
+  .accum-label.s3main { background: #f0f0f0; color: var(--dark); }
+  .accum-label.s4b { background: #fde8e8; color: #cc4444; }
+  .accum-label.s4a { background: var(--green-bg); color: var(--green); }
+  .accum-value { font-size: 13px; color: var(--dark); line-height: 1.6; word-break: break-all; }
+  .accum-value.strong { font-weight: 700; }
+
+  .work-card { background: white; border-radius: 14px; margin-bottom: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; display: none; }
+  .work-card.active { display: block; }
+  .work-card-header { padding: 18px 24px 14px; border-bottom: 1px solid var(--border); }
+  .step-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; background: var(--accent-light); color: var(--accent); }
+  .work-card-header h2 { font-family: 'Noto Serif JP', serif; font-size: 17px; font-weight: 700; color: var(--dark); line-height: 1.4; margin-bottom: 6px; }
+  .work-card-header p { font-size: 13px; color: var(--text-light); line-height: 1.7; }
+  .work-card-body { padding: 20px 24px; }
+  .field-block { margin-bottom: 20px; }
+  .field-block:last-child { margin-bottom: 0; }
+  .field-label { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .field-tag { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; }
+  .field-tag.q { background: var(--accent-light); color: var(--accent); }
+  .field-tag.a-type { background: var(--a-bg); color: var(--a-color); }
+  .field-tag.b-type { background: var(--b-bg); color: var(--b-color); }
+  .field-tag.c-type { background: var(--c-bg); color: var(--c-color); }
+  .field-tag.result { background: var(--green-bg); color: var(--green); }
+  .field-hint { font-size: 11.5px; color: var(--text-light); }
+  .field-input { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 11px 14px; font-size: 14px; font-family: 'Noto Sans JP', sans-serif; color: var(--dark); background: var(--white); outline: none; resize: none; transition: border-color 0.2s, box-shadow 0.2s; line-height: 1.6; }
+  .field-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(74,111,165,0.1); }
+  .field-input::placeholder { color: #c0c8d4; }
+  .type-checks { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  .type-check { display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; border: 2px solid var(--border); cursor: pointer; transition: all 0.2s; font-size: 13px; font-weight: 500; -webkit-tap-highlight-color: transparent; }
+  .type-check:hover { border-color: var(--accent-mid); }
+  .type-check.selected-a { background: var(--a-bg); border-color: var(--a-border); color: var(--a-color); }
+  .type-check.selected-b { background: var(--b-bg); border-color: var(--b-border); color: var(--b-color); }
+  .type-check.selected-c { background: var(--c-bg); border-color: var(--c-border); color: var(--c-color); }
+  .template-options { display: flex; flex-direction: column; gap: 8px; }
+  .template-option { padding: 12px 14px; border-radius: 8px; border: 2px solid var(--border); cursor: pointer; transition: all 0.2s; -webkit-tap-highlight-color: transparent; }
+  .template-option:hover { border-color: var(--accent-mid); background: var(--accent-light); }
+  .template-option.selected { border-color: var(--accent); background: var(--accent-light); }
+  .template-name { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+  .template-rule { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+  .ba-display { background: var(--gray); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+  .ba-display.show { display: block; }
+  .ba-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .ba-row:last-child { margin-bottom: 0; }
+  .ba-icon { font-size: 13px; font-weight: 700; padding: 3px 8px; border-radius: 4px; flex-shrink: 0; margin-top: 1px; }
+  .ba-icon.before { background: #fde8e8; color: #cc4444; }
+  .ba-icon.after { background: var(--green-bg); color: var(--green); }
+  .ba-text { font-size: 14px; line-height: 1.65; color: var(--dark); }
+  .summary-card { background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 12px; padding: 20px; margin-top: 16px; display: none; }
+  .summary-card.show { display: block; }
+  .summary-title { font-size: 12px; font-weight: 700; color: var(--green); letter-spacing: 0.06em; margin-bottom: 10px; }
+  .summary-text { font-size: 15px; font-weight: 700; color: var(--dark); line-height: 1.75; font-family: 'Noto Serif JP', serif; white-space: pre-wrap; }
+  .nav-buttons { display: flex; gap: 10px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); }
+  .nav-btn { padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 700; font-family: 'Noto Sans JP', sans-serif; cursor: pointer; transition: all 0.2s; border: none; }
+  .nav-btn.back { background: var(--gray); color: var(--text-light); border: 1.5px solid var(--border); }
+  .nav-btn.back:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-btn.next { flex: 1; background: var(--accent); color: white; }
+  .nav-btn.next:hover { background: #3a5f95; }
+  .nav-btn.finish { flex: 1; background: var(--green); color: white; }
+  .nav-btn.finish:hover { background: #226a4a; }
+  .complete-screen { background: white; border-radius: 14px; padding: 32px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); text-align: center; display: none; }
+  .complete-screen.show { display: block; }
+  .complete-icon { font-size: 48px; margin-bottom: 16px; }
+  .complete-screen h2 { font-family: 'Noto Serif JP', serif; font-size: 20px; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
+  .complete-screen p { font-size: 13.5px; color: var(--text-light); line-height: 1.8; margin-bottom: 20px; }
+  .result-box { background: var(--gray); border-radius: 10px; padding: 16px; text-align: left; margin-bottom: 14px; }
+  .result-label { font-size: 11px; font-weight: 700; color: var(--text-light); letter-spacing: 0.06em; margin-bottom: 8px; }
+  .result-content { font-size: 15px; font-weight: 700; color: var(--dark); line-height: 1.75; font-family: 'Noto Serif JP', serif; white-space: pre-wrap; }
+  .action-reminder { background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 10px; padding: 14px 16px; font-size: 13px; color: var(--green); font-weight: 500; line-height: 1.65; margin-bottom: 16px; text-align: left; }
+  .restart-btn { padding: 12px 24px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; font-family: 'Noto Sans JP', sans-serif; cursor: pointer; transition: background 0.2s; }
+  .restart-btn:hover { background: #3a5f95; }
+  .history-section { background: white; border-radius: 14px; padding: 22px 24px; margin-top: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: none; }
+  .history-section.show { display: block; }
+  .history-section h2 { font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 14px; }
+  .history-list { display: flex; flex-direction: column; gap: 10px; }
+  .history-item { background: var(--gray); border-radius: 8px; padding: 12px 14px; }
+  .history-date { font-size: 11px; color: var(--text-light); margin-bottom: 6px; }
+  .history-before { font-size: 12px; color: var(--text-light); margin-bottom: 4px; }
+  .history-after { font-size: 14px; font-weight: 500; color: var(--green); }
+  .footer { text-align: center; margin-top: 28px; font-size: 11.5px; color: var(--text-light); line-height: 1.7; }
+  @media (max-width: 480px) {
+    .header { padding: 24px 20px; }
+    .header h1 { font-size: 20px; }
+    .work-card-body { padding: 16px; }
+    .type-checks { gap: 6px; }
+    .type-check { padding: 7px 10px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <div class="badge">購入者限定特典</div>
+    <h1>思考書き換えワークシート</h1>
+    <p>穴埋め形式で書き込むだけで、思考の書き換えが完成します。<br>本編第2章・第3章のワークを、そのままここでできます。</p>
+    <div class="howto">
+      💡 STEP1〜5を順番に埋めてください。ステップを進めると、前のステップで書いた内容が上に蓄積されます。
+    </div>
+  </div>
+
+  <div class="step-progress">
+    <div class="step-dots" id="step-dots"></div>
+    <div class="step-labels" id="step-labels"></div>
+  </div>
+
+  <!-- 蓄積サマリーパネル -->
+  <div class="accumulate-panel" id="accumulate-panel">
+    <div class="accumulate-title">📋 これまでの入力内容（確認用）</div>
+    <div class="accum-rows" id="accum-rows"></div>
+  </div>
+
+  <!-- STEP1 -->
+  <div class="work-card active" id="card-0">
+    <div class="work-card-header">
+      <div class="step-tag">STEP 1 / 5</div>
+      <h2>今、止まっている行動を1つ書く</h2>
+      <p>副業を始める・noteを書く・転職活動をする・発信を始める…何でもOKです。1つだけ選んでください。</p>
+    </div>
+    <div class="work-card-body">
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag q">書き出す</span>
+          <span class="field-hint">「〜する」の形で書く</span>
+        </div>
+        <input class="field-input" id="s1-action" type="text" placeholder="例：noteの記事を書いて公開する　／　副業を始める" />
+      </div>
+      <div class="nav-buttons">
+        <button class="nav-btn next" onclick="goStep(1)">次へ →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP2 -->
+  <div class="work-card" id="card-1">
+    <div class="work-card-header">
+      <div class="step-tag">STEP 2 / 5</div>
+      <h2>やろうとした瞬間、頭に浮かぶ言葉を全部書く</h2>
+      <p>きれいに書こうとしなくていいです。「めんどくさい」「怖い」「どうせ」など、思ったままを書いてください。</p>
+    </div>
+    <div class="work-card-body">
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag q">書き出す</span>
+          <span class="field-hint">頭の中をそのまま出す。複数あればすべて書く</span>
+        </div>
+        <textarea class="field-input" id="s2-thoughts" rows="4" placeholder="例：ちゃんとやらなきゃ／正解が分からないからできない／どうせ誰にも読まれない／早くやらなきゃダメ"></textarea>
+      </div>
+      <div class="nav-buttons">
+        <button class="nav-btn back" onclick="goStep(0)">← 戻る</button>
+        <button class="nav-btn next" onclick="goStep(2)">次へ →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP3 -->
+  <div class="work-card" id="card-2">
+    <div class="work-card-header">
+      <div class="step-tag">STEP 3 / 5</div>
+      <h2>書き出した言葉を3つに分類する</h2>
+      <p>書いた言葉がどのタイプに当てはまるか整理してください。複数選択OKです。</p>
+    </div>
+    <div class="work-card-body">
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag a-type">A：完璧主義</span>
+          <span class="field-hint">「ちゃんと・完璧に・正解が分からない」など</span>
+        </div>
+        <textarea class="field-input" id="s3-a" rows="2" placeholder="例：ちゃんとやらなきゃ　／　正解が分からないからできない"></textarea>
+      </div>
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag b-type">B：義務感</span>
+          <span class="field-hint">「やらなきゃ・すべき・ダメ」など</span>
+        </div>
+        <textarea class="field-input" id="s3-b" rows="2" placeholder="例：早くやらなきゃダメ　／　やらない自分はダメだ"></textarea>
+      </div>
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag c-type">C：自己否定</span>
+          <span class="field-hint">「どうせ・無理・できない・遅い」など</span>
+        </div>
+        <textarea class="field-input" id="s3-c" rows="2" placeholder="例：どうせ誰にも読まれない　／　自分には書けるネタがない"></textarea>
+      </div>
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag q">最も強いブレーキ</span>
+          <span class="field-hint">A・B・Cの中で一番リアルに感じるものを選ぶ</span>
+        </div>
+        <div class="type-checks" id="main-type-checks">
+          <div class="type-check" onclick="selectMainType('a', this)">A：完璧主義</div>
+          <div class="type-check" onclick="selectMainType('b', this)">B：義務感</div>
+          <div class="type-check" onclick="selectMainType('c', this)">C：自己否定</div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="nav-btn back" onclick="goStep(1)">← 戻る</button>
+        <button class="nav-btn next" onclick="goStep(3)">次へ →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP4 -->
+  <div class="work-card" id="card-3">
+    <div class="work-card-header">
+      <div class="step-tag">STEP 4 / 5</div>
+      <h2>テンプレートで思考を書き換える</h2>
+      <p>上の「これまでの入力内容」を見ながら、止まる思考を1つ選んで書き換えます。</p>
+    </div>
+    <div class="work-card-body">
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag q">テンプレートを選ぶ</span>
+        </div>
+        <div class="template-options">
+          <div class="template-option" onclick="selectTemplate('a', this)">
+            <div class="template-name">A：許可思考テンプレート（義務感→選択）</div>
+            <div class="template-rule">「〜しなきゃ」→「〜してもいい」に変える</div>
+          </div>
+          <div class="template-option" onclick="selectTemplate('b', this)">
+            <div class="template-name">B：最低ライン思考テンプレート（完璧主義→1%）</div>
+            <div class="template-rule">「完璧に」→「1行だけ・タイトルだけ・雑でOK」に変える</div>
+          </div>
+          <div class="template-option" onclick="selectTemplate('c', this)">
+            <div class="template-name">C：実験思考テンプレート（自己否定→試す）</div>
+            <div class="template-rule">「どうせ無理」→「1回試してみる・経験が増えるだけ」に変える</div>
+          </div>
+        </div>
+      </div>
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag q">Before（止まる思考）</span>
+          <span class="field-hint">上の蓄積パネルから1つ選んでコピーして貼る</span>
+        </div>
+        <input class="field-input" id="s4-before" type="text" placeholder="例：ちゃんとした記事を書かないと意味がない" oninput="updateBADisplay()" />
+      </div>
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag result">After（軽くなる思考）</span>
+          <span class="field-hint">テンプレートを使って書き換える</span>
+        </div>
+        <input class="field-input" id="s4-after" type="text" placeholder="例：タイトルだけ書いてもいい。雑でOK。動きながら正解に近づく" oninput="updateBADisplay()" />
+      </div>
+      <div class="ba-display" id="ba-display">
+        <div class="ba-row">
+          <span class="ba-icon before">止まる</span>
+          <div class="ba-text" id="ba-before-text"></div>
+        </div>
+        <div class="ba-row">
+          <span class="ba-icon after">軽くなる</span>
+          <div class="ba-text" id="ba-after-text" style="font-weight:700;color:var(--green);"></div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button class="nav-btn back" onclick="goStep(2)">← 戻る</button>
+        <button class="nav-btn next" onclick="goStep(4)">次へ →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP5 -->
+  <div class="work-card" id="card-4">
+    <div class="work-card-header">
+      <div class="step-tag">STEP 5 / 5</div>
+      <h2>書き換えた思考を1文にまとめて、5分以内に動く</h2>
+      <p>この1文が、行動前に毎回使う「スイッチの言葉」になります。声に出してから動いてください。</p>
+    </div>
+    <div class="work-card-body">
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag result">1文にまとめる</span>
+          <span class="field-hint">「〜してもいい。〜だけでOK。試すだけだから失敗はない」のような形で</span>
+        </div>
+        <textarea class="field-input" id="s5-sentence" rows="3" placeholder="例：タイトルだけ書いてもいい。雑でOK。1分だけやってみて、どうなるか見てみる。失敗じゃなく実験だ。" oninput="updateSummary()"></textarea>
+      </div>
+      <div class="field-block">
+        <div class="field-label">
+          <span class="field-tag q">今日やる最小行動</span>
+          <span class="field-hint">5分以内・絶対できるレベルで決める</span>
+        </div>
+        <input class="field-input" id="s5-minaction" type="text" placeholder="例：タイトルを1つ書く　／　エディタを開くだけ　／　1行だけ書く" oninput="updateSummary()" />
+      </div>
+      <div class="summary-card" id="summary-card">
+        <div class="summary-title">✅ あなたのスイッチの言葉</div>
+        <div class="summary-text" id="summary-text"></div>
+      </div>
+      <div class="nav-buttons">
+        <button class="nav-btn back" onclick="goStep(3)">← 戻る</button>
+        <button class="nav-btn finish" onclick="finishWork()">完成 → 声に出して動く ⚡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 完了画面 -->
+  <div class="complete-screen" id="complete-screen">
+    <div class="complete-icon">⚡</div>
+    <h2>思考の書き換え、完成しました</h2>
+    <p>書き換えただけでは変わりません。<br>今すぐ、5分以内に最小行動を1つやってください。</p>
+    <div class="result-box">
+      <div class="result-label">🗣 声に出す言葉</div>
+      <div class="result-content" id="final-sentence"></div>
+    </div>
+    <div class="result-box">
+      <div class="result-label">⚡ 今すぐやること</div>
+      <div class="result-content" id="final-action"></div>
+    </div>
+    <div class="action-reminder">
+      📌 この1文を、行動前に毎回声に出してください。<br>
+      思考が重くなったと感じたら、もう一度ワークに戻って書き換え直してください。
+    </div>
+    <button class="restart-btn" onclick="restartWork()">新しい思考を書き換える</button>
+  </div>
+
+  <!-- 過去の記録 -->
+  <div class="history-section" id="history-section">
+    <h2>📚 過去の書き換え記録</h2>
+    <div class="history-list" id="history-list"></div>
+  </div>
+
+  <div class="footer">
+    書き換えは1回で終わりではありません。重くなったら何度でも戻ってください。<br>
+    歯磨きと同じで、毎日やるものです。
+  </div>
+
+</div>
+
+<script>
+  const STEPS = ['行動を書く', 'ブレーキを出す', '分類する', '書き換える', '1文にまとめる'];
+  let currentStep = 0;
+  let selectedMainType = '';
+  let selectedTemplate = '';
+  const HISTORY_KEY = 'thinkingRewriteHistory';
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // ★蓄積サマリー更新
+  function updateAccumulatePanel() {
+    const panel = document.getElementById('accumulate-panel');
+    const rows = document.getElementById('accum-rows');
+    if (currentStep === 0) { panel.classList.remove('show'); return; }
+
+    const s1 = document.getElementById('s1-action').value.trim();
+    const s2 = document.getElementById('s2-thoughts').value.trim();
+    const s3a = document.getElementById('s3-a').value.trim();
+    const s3b = document.getElementById('s3-b').value.trim();
+    const s3c = document.getElementById('s3-c').value.trim();
+    const s4before = document.getElementById('s4-before').value.trim();
+    const s4after = document.getElementById('s4-after').value.trim();
+    const typeLabel = { a: 'A：完璧主義', b: 'B：義務感', c: 'C：自己否定' };
+
+    let html = '';
+
+    if (s1) html += `<div class="accum-row"><span class="accum-label s1">STEP1　対象行動</span><span class="accum-value strong">${escHtml(s1)}</span></div>`;
+    if (currentStep >= 2 && s2) html += `<div class="accum-row"><span class="accum-label s2">STEP2　浮かんだ言葉</span><span class="accum-value">${escHtml(s2)}</span></div>`;
+    if (currentStep >= 3) {
+      if (s3a) html += `<div class="accum-row"><span class="accum-label s3a">A　完璧主義</span><span class="accum-value">${escHtml(s3a)}</span></div>`;
+      if (s3b) html += `<div class="accum-row"><span class="accum-label s3b">B　義務感</span><span class="accum-value">${escHtml(s3b)}</span></div>`;
+      if (s3c) html += `<div class="accum-row"><span class="accum-label s3c">C　自己否定</span><span class="accum-value">${escHtml(s3c)}</span></div>`;
+      if (selectedMainType) html += `<div class="accum-row"><span class="accum-label s3main">最強ブレーキ</span><span class="accum-value strong">${typeLabel[selectedMainType]}</span></div>`;
+    }
+    if (currentStep >= 4) {
+      if (s4before) html += `<div class="accum-row"><span class="accum-label s4b">✕　止まる思考</span><span class="accum-value">${escHtml(s4before)}</span></div>`;
+      if (s4after) html += `<div class="accum-row"><span class="accum-label s4a">◯　軽くなる思考</span><span class="accum-value strong">${escHtml(s4after)}</span></div>`;
+    }
+
+    if (html) { rows.innerHTML = html; panel.classList.add('show'); }
+    else { panel.classList.remove('show'); }
+  }
+
+  function buildStepDots() {
+    const dotsEl = document.getElementById('step-dots');
+    const labelsEl = document.getElementById('step-labels');
+    dotsEl.innerHTML = ''; labelsEl.innerHTML = '';
+    STEPS.forEach((label, i) => {
+      if (i > 0) {
+        const line = document.createElement('div');
+        line.className = 'step-line'; line.id = 'line-' + (i-1);
+        dotsEl.appendChild(line);
+      }
+      const dot = document.createElement('div');
+      dot.className = 'step-dot'; dot.id = 'dot-' + i; dot.textContent = i + 1;
+      dotsEl.appendChild(dot);
+      const lbl = document.createElement('div');
+      lbl.className = 'step-label'; lbl.id = 'label-' + i; lbl.textContent = label;
+      labelsEl.appendChild(lbl);
+    });
+    updateStepUI();
+  }
+
+  function updateStepUI() {
+    STEPS.forEach((_, i) => {
+      const dot = document.getElementById('dot-' + i);
+      const lbl = document.getElementById('label-' + i);
+      dot.className = 'step-dot' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '');
+      lbl.className = 'step-label' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '');
+      dot.textContent = i < currentStep ? '✓' : i + 1;
+      if (i > 0) document.getElementById('line-' + (i-1)).className = 'step-line' + (i <= currentStep ? ' done' : '');
+    });
+  }
+
+  function goStep(step) {
+    document.getElementById('card-' + currentStep).classList.remove('active');
+    currentStep = step;
+    document.getElementById('card-' + currentStep).classList.add('active');
+    updateStepUI();
+    updateAccumulatePanel();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function selectMainType(type, el) {
+    selectedMainType = type;
+    document.querySelectorAll('#main-type-checks .type-check').forEach(e => e.className = 'type-check');
+    el.className = 'type-check selected-' + type;
+  }
+
+  function selectTemplate(type, el) {
+    selectedTemplate = type;
+    document.querySelectorAll('.template-option').forEach(e => e.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function updateBADisplay() {
+    const before = document.getElementById('s4-before').value.trim();
+    const after = document.getElementById('s4-after').value.trim();
+    const display = document.getElementById('ba-display');
+    if (before || after) {
+      display.classList.add('show');
+      document.getElementById('ba-before-text').textContent = before || '（未入力）';
+      document.getElementById('ba-after-text').textContent = after || '（未入力）';
+    } else { display.classList.remove('show'); }
+  }
+
+  function updateSummary() {
+    const sentence = document.getElementById('s5-sentence').value.trim();
+    const action = document.getElementById('s5-minaction').value.trim();
+    const card = document.getElementById('summary-card');
+    if (sentence || action) {
+      card.classList.add('show');
+      let content = sentence || '';
+      if (action) content += (content ? '\n\n' : '') + '→ 今日やること：「' + action + '」';
+      document.getElementById('summary-text').textContent = content;
+    } else { card.classList.remove('show'); }
+  }
+
+  function finishWork() {
+    const sentence = document.getElementById('s5-sentence').value.trim();
+    const action = document.getElementById('s5-minaction').value.trim();
+    if (!sentence && !action) { alert('STEP5を入力してから完成ボタンを押してください。'); return; }
+    document.getElementById('final-sentence').textContent = sentence || '（未入力）';
+    document.getElementById('final-action').textContent = action || '（未入力）';
+    saveHistory({ date: new Date().toLocaleDateString('ja-JP'), action: document.getElementById('s1-action').value.trim(), before: document.getElementById('s4-before').value.trim(), after: document.getElementById('s4-after').value.trim(), sentence, minAction: action });
+    document.getElementById('card-4').classList.remove('active');
+    document.getElementById('accumulate-panel').classList.remove('show');
+    document.getElementById('complete-screen').classList.add('show');
+    currentStep = 5;
+    renderHistory();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function restartWork() {
+    ['s1-action','s4-before','s4-after','s5-minaction'].forEach(id => document.getElementById(id).value = '');
+    ['s2-thoughts','s3-a','s3-b','s3-c','s5-sentence'].forEach(id => document.getElementById(id).value = '');
+    selectedMainType = ''; selectedTemplate = '';
+    document.querySelectorAll('#main-type-checks .type-check').forEach(e => e.className = 'type-check');
+    document.querySelectorAll('.template-option').forEach(e => e.classList.remove('selected'));
+    document.getElementById('ba-display').classList.remove('show');
+    document.getElementById('summary-card').classList.remove('show');
+    document.getElementById('complete-screen').classList.remove('show');
+    document.getElementById('accumulate-panel').classList.remove('show');
+    currentStep = 0;
+    document.getElementById('card-0').classList.add('active');
+    updateStepUI();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function saveHistory(entry) {
+    try {
+      let h = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      h.unshift(entry); if (h.length > 10) h = h.slice(0, 10);
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(h));
+    } catch(e) {}
+  }
+
+  function renderHistory() {
+    try {
+      const h = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      const section = document.getElementById('history-section');
+      const list = document.getElementById('history-list');
+      if (!h.length) { section.classList.remove('show'); return; }
+      section.classList.add('show'); list.innerHTML = '';
+      h.forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'history-item';
+        el.innerHTML = `<div class="history-date">${item.date}　対象：${item.action || '未記入'}</div>${item.before ? `<div class="history-before">✕ ${item.before}</div>` : ''}${item.after ? `<div class="history-after">◯ ${item.after}</div>` : ''}`;
+        list.appendChild(el);
+      });
+    } catch(e) {}
+  }
+
+  buildStepDots();
+  renderHistory();
+</script>
+</body>
+</html>
