@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IF-THENルール設計テンプレート｜購入者限定特典</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1a1a2e;
+    --accent: #4a6fa5;
+    --accent-light: #e8f0fb;
+    --accent-mid: #c5d8f5;
+    --green: #2d8a60;
+    --green-bg: #eaf6f0;
+    --green-border: #a3d9bf;
+    --orange: #c07830;
+    --orange-bg: #fef3e6;
+    --orange-border: #f0c888;
+    --gray: #f5f7fa;
+    --border: #dde3ec;
+    --text: #2d3748;
+    --text-light: #718096;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #f0f4f8;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  .wrapper { max-width: 700px; margin: 0 auto; }
+
+  /* ヘッダー */
+  .header {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 32px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--accent);
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .header p {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  .howto {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  /* 解説ボックス */
+  .explain-box {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .explain-box h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+
+  .formula {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: var(--gray);
+    border-radius: 10px;
+    padding: 16px;
+    margin: 14px 0;
+    flex-wrap: wrap;
+  }
+
+  .formula-part {
+    text-align: center;
+  }
+
+  .formula-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+
+  .formula-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    padding: 8px 16px;
+    border-radius: 8px;
+  }
+
+  .formula-value.if { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .formula-value.then { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange-border); }
+
+  .formula-arrow {
+    font-size: 20px;
+    color: var(--text-light);
+    font-weight: 700;
+  }
+
+  .explain-box p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* ルールカード */
+  .rule-card {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .rule-card:focus-within {
+    box-shadow: 0 4px 20px rgba(74,111,165,0.15);
+  }
+
+  .rule-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: var(--gray);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .rule-num {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .num-badge {
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .rule-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .rule-status {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+  }
+
+  .rule-status.empty { background: var(--border); color: var(--text-light); }
+  .rule-status.partial { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange-border); }
+  .rule-status.complete { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+
+  .rule-body { padding: 20px; }
+
+  .field-group {
+    margin-bottom: 16px;
+  }
+
+  .field-group:last-child { margin-bottom: 0; }
+
+  .field-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .field-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  .field-tag.if { background: var(--green-bg); color: var(--green); }
+  .field-tag.then { background: var(--orange-bg); color: var(--orange); }
+  .field-tag.note { background: var(--accent-light); color: var(--accent); }
+
+  .field-hint {
+    font-size: 11.5px;
+    color: var(--text-light);
+  }
+
+  .field-input {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--dark);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: none;
+    outline: none;
+    line-height: 1.6;
+  }
+
+  .field-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(74,111,165,0.1);
+  }
+
+  .field-input::placeholder { color: #c0c8d4; }
+
+  /* プレビューエリア */
+  .preview-section {
+    background: white;
+    border-radius: 14px;
+    padding: 24px;
+    margin-top: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .preview-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .preview-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .preview-item {
+    background: var(--gray);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: none;
+    border-left: 3px solid var(--accent);
+  }
+
+  .preview-item.show { display: block; }
+
+  .preview-item-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .preview-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark);
+    line-height: 1.7;
+  }
+
+  .preview-text .if-part { color: var(--green); font-weight: 700; }
+  .preview-text .then-part { color: var(--orange); font-weight: 700; }
+
+  .preview-empty {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-light);
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+
+  /* 例文セクション */
+  .example-section {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .example-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+
+  .example-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .example-item {
+    background: var(--gray);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.15s;
+    border: 1.5px solid transparent;
+  }
+
+  .example-item:hover {
+    background: var(--accent-light);
+    border-color: var(--accent-mid);
+  }
+
+  .example-item .ex-if { color: var(--green); font-weight: 700; }
+  .example-item .ex-then { color: var(--orange); font-weight: 700; }
+  .example-item .ex-hint { font-size: 11px; color: var(--text-light); margin-top: 3px; }
+
+  .tap-hint {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+
+  /* フッター */
+  .footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 11.5px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 480px) {
+    .header { padding: 24px 20px; }
+    .header h1 { font-size: 20px; }
+    .rule-body { padding: 16px; }
+    .formula { gap: 8px; }
+    .formula-value { font-size: 13px; padding: 7px 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ヘッダー -->
+  <div class="header">
+    <div class="badge">購入者限定特典</div>
+    <h1>IF-THENルール設計テンプレート</h1>
+    <p>書き込むだけで「考えなくても動ける仕組み」が完成します。<br>トリガー（IF）と行動（THEN）を決めるだけでOKです。</p>
+    <div class="howto">
+      💡 入力すると下の「マイIF-THENルール一覧」にリアルタイムで反映されます。まず1つだけ作ってみてください。
+    </div>
+  </div>
+
+  <!-- 解説 -->
+  <div class="explain-box">
+    <h2>IF-THENルールとは？</h2>
+    <div class="formula">
+      <div class="formula-part">
+        <div class="formula-label">IF（トリガー）</div>
+        <div class="formula-value if">〇〇をしたら</div>
+      </div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-part">
+        <div class="formula-label">THEN（行動）</div>
+        <div class="formula-value then">△△をする</div>
+      </div>
+    </div>
+    <p>「やるかどうか」を毎回考えるのをやめる仕組みです。毎日すでにやっている習慣（歯磨き・食事・起床など）にセットするだけで、考えなくても動ける状態が作れます。まず1つだけ作ることから始めてください。</p>
+  </div>
+
+  <!-- 例文 -->
+  <div class="example-section">
+    <h2>📝 参考例（タップで入力欄にコピー）</h2>
+    <div class="tap-hint">気に入ったものをタップすると、ルール①に自動入力されます</div>
+    <div class="example-list">
+      <div class="example-item" onclick="fillExample('歯磨きをしたら', '1行だけ書く（タイトルだけでOK）')">
+        <span class="ex-if">歯磨きをしたら</span>　→　<span class="ex-then">1行だけ書く（タイトルだけでOK）</span>
+        <div class="ex-hint">就寝前の習慣に紐づける定番パターン</div>
+      </div>
+      <div class="example-item" onclick="fillExample('コーヒーを淹れたら', 'noteのエディタを開く（書かなくてもOK）')">
+        <span class="ex-if">コーヒーを淹れたら</span>　→　<span class="ex-then">noteのエディタを開く（書かなくてもOK）</span>
+        <div class="ex-hint">朝の習慣に紐づける。開くだけでOKにするのがポイント</div>
+      </div>
+      <div class="example-item" onclick="fillExample('仕事が終わったら', 'タイトルと見出しだけ作る（5分以内）')">
+        <span class="ex-if">仕事が終わったら</span>　→　<span class="ex-then">タイトルと見出しだけ作る（5分以内）</span>
+        <div class="ex-hint">退勤という明確なトリガーを使う</div>
+      </div>
+      <div class="example-item" onclick="fillExample('電車に乗ったら', 'メモアプリを開いてアイデアを1つだけ書く')">
+        <span class="ex-if">電車に乗ったら</span>　→　<span class="ex-then">メモアプリを開いてアイデアを1つだけ書く</span>
+        <div class="ex-hint">通勤時間をインプットではなくアウトプットに変える</div>
+      </div>
+      <div class="example-item" onclick="fillExample('シャワーを浴びる前に', '今日やったことを1行だけ記録する')">
+        <span class="ex-if">シャワーを浴びる前に</span>　→　<span class="ex-then">今日やったことを1行だけ記録する</span>
+        <div class="ex-hint">振り返り習慣を無理なく続けるパターン</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ルール入力カード × 3 -->
+  <div id="rule-1" class="rule-card">
+    <div class="rule-header">
+      <div class="rule-num">
+        <div class="num-badge">1</div>
+        <div class="rule-title">まず最初の1つを作る（最重要）</div>
+      </div>
+      <div class="rule-status empty" id="status-1">未入力</div>
+    </div>
+    <div class="rule-body">
+      <div class="field-group">
+        <div class="field-label">
+          <span class="field-tag if">IF　トリガー</span>
+          <span class="field-hint">毎日確実にやっている習慣を選ぶ</span>
+        </div>
+        <input class="field-input" id="if-1" type="text" placeholder="例：歯磨きをしたら　／　コーヒーを淹れたら" oninput="updatePreview(1)" />
+      </div>
+      <div class="field-group">
+        <div class="field-label">
+          <span class="field-tag then">THEN　行動</span>
+          <span class="field-hint">5分以内・絶対できるレベルに設定する</span>
+        </div>
+        <input class="field-input" id="then-1" type="text" placeholder="例：1行だけ書く　／　タイトルだけ作る" oninput="updatePreview(1)" />
+      </div>
+      <div class="field-group">
+        <div class="field-label">
+          <span class="field-tag note">メモ</span>
+          <span class="field-hint">終了ラインや注意点など（任意）</span>
+        </div>
+        <textarea class="field-input" id="note-1" rows="2" placeholder="例：1行書いたら終了。調子よくても30分以上はやらない" oninput="updatePreview(1)"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div id="rule-2" class="rule-card">
+    <div class="rule-header">
+      <div class="rule-num">
+        <div class="num-badge">2</div>
+        <div class="rule-title">2つ目のルール（1つ目が定着してから）</div>
+      </div>
+      <div class="rule-status empty" id="status-2">未入力</div>
+    </div>
+    <div class="rule-body">
+      <div class="field-group">
+        <div class="field-label">
+          <span class="field-tag if">IF　トリガー</span>
+          <span class="field-hint">1つ目と別の習慣を選ぶと効果的</span>
+        </div>
+        <input class="field-input" id="if-2" type="text" placeholder="例：昼休みに入ったら　／　夜ご飯を食べたら" oninput="updatePreview(2)" />
+      </div>
+      <div class="field-group">
+        <div class="field-label">
+          <span class="field-tag then">THEN　行動</span>
+          <span class="field-hint">1つ目と別の行動を設定する</span>
+        </div>
+        <input class="field-input" id="then-2" type="text" placeholder="例：見出しを1つ追加する　／　誤字チェックだけする" oninput="updatePreview(2)" />
+      </div>
+      <div class="field-group">
+        <div class="field-label">
+          <span class="field-tag note">メモ</span>
+          <span class="field-hint">終了ラインや注意点など（任意）</span>
+        </div>
+        <textarea class="field-input" id="note-2" rows="2" placeholder="例：5分タイマーをセットしてから始める" oninput="updatePreview(2)"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div id="rule-3" class="rule-card">
+    <div class="rule-header">
+      <div class="rule-num">
+        <div class="num-badge">3</div>
+        <div class="rule-title">3つ目のルール（余裕が出てきたら）</div>
+      </div>
+      <div class="rule-status empty" id="status-3">未入力</div>
+    </div>
+    <div class="rule-body">
+      <div class="field-group">
+        <div class="field-label">
+          <span class="field-tag if">IF　トリガー</span>
+          <span class="field-hint">週1回など頻度を下げてもOK</span>
+        </div>
+        <input class="field-input" id="if-3" type="text" placeholder="例：週末の朝起きたら　／　休日の昼食後" oninput="updatePreview(3)" />
+      </div>
+      <div class="field-group">
+        <div class="field-label">
+          <span class="field-tag then">THEN　行動</span>
+          <span class="field-hint">まとめ作業や振り返りに使うのもおすすめ</span>
+        </div>
+        <input class="field-input" id="then-3" type="text" placeholder="例：今週書いた下書きを1本仕上げる" oninput="updatePreview(3)" />
+      </div>
+      <div class="field-group">
+        <div class="field-label">
+          <span class="field-tag note">メモ</span>
+          <span class="field-hint">終了ラインや注意点など（任意）</span>
+        </div>
+        <textarea class="field-input" id="note-3" rows="2" placeholder="例：完成しなくてもOK。途中でやめてもいい" oninput="updatePreview(3)"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- プレビュー -->
+  <div class="preview-section">
+    <h2>✅ マイIF-THENルール一覧</h2>
+    <div class="preview-list" id="preview-list">
+      <div class="preview-empty" id="preview-empty">
+        上の入力欄に書き込むと、<br>ここにあなたのIF-THENルールが表示されます。
+      </div>
+      <div class="preview-item" id="preview-1">
+        <div class="preview-item-num">ルール①</div>
+        <div class="preview-text" id="preview-text-1"></div>
+      </div>
+      <div class="preview-item" id="preview-2">
+        <div class="preview-item-num">ルール②</div>
+        <div class="preview-text" id="preview-text-2"></div>
+      </div>
+      <div class="preview-item" id="preview-3">
+        <div class="preview-item-num">ルール③</div>
+        <div class="preview-text" id="preview-text-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    まず1つだけ作って、今日のトリガーが来たら動いてください。<br>
+    設計して満足で終わらせないことが、一番大切です。
+  </div>
+
+</div>
+
+<script>
+  function updatePreview(num) {
+    const ifVal = document.getElementById('if-' + num).value.trim();
+    const thenVal = document.getElementById('then-' + num).value.trim();
+    const noteVal = document.getElementById('note-' + num).value.trim();
+    const status = document.getElementById('status-' + num);
+    const previewItem = document.getElementById('preview-' + num);
+    const previewText = document.getElementById('preview-text-' + num);
+
+    // ステータス更新
+    if (!ifVal && !thenVal) {
+      status.textContent = '未入力';
+      status.className = 'rule-status empty';
+      previewItem.classList.remove('show');
+    } else if (ifVal && thenVal) {
+      status.textContent = '完成 ✓';
+      status.className = 'rule-status complete';
+      let text = '<span class="if-part">「' + escHtml(ifVal) + '」</span>　→　<span class="then-part">「' + escHtml(thenVal) + '」</span>';
+      if (noteVal) text += '<br><span style="font-size:12px;color:#718096;font-weight:400;">📌 ' + escHtml(noteVal) + '</span>';
+      previewText.innerHTML = text;
+      previewItem.classList.add('show');
+    } else {
+      status.textContent = '入力中…';
+      status.className = 'rule-status partial';
+      let text = '';
+      if (ifVal) text += '<span class="if-part">「' + escHtml(ifVal) + '」</span>　→　';
+      if (thenVal) text += '<span class="then-part">「' + escHtml(thenVal) + '」</span>';
+      previewText.innerHTML = text;
+      previewItem.classList.add('show');
+    }
+
+    // 空メッセージの表示制御
+    const anyVisible = [1,2,3].some(n => document.getElementById('preview-' + n).classList.contains('show'));
+    document.getElementById('preview-empty').style.display = anyVisible ? 'none' : 'block';
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function fillExample(ifText, thenText) {
+    document.getElementById('if-1').value = ifText;
+    document.getElementById('then-1').value = thenText;
+    updatePreview(1);
+    document.getElementById('rule-1').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+</body>
+</html>

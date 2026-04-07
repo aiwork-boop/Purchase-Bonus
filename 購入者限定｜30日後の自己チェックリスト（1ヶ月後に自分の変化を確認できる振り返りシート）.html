@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30日後の自己チェックリスト｜購入者限定特典</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1a1a2e;
+    --accent: #4a6fa5;
+    --accent-light: #e8f0fb;
+    --accent-mid: #c5d8f5;
+    --green: #2d8a60;
+    --green-bg: #eaf6f0;
+    --green-border: #a3d9bf;
+    --green-light: #d4eddf;
+    --orange: #c9860a;
+    --orange-bg: #fef9e7;
+    --orange-border: #f0d070;
+    --gray: #f5f7fa;
+    --border: #dde3ec;
+    --text: #2d3748;
+    --text-light: #718096;
+    --white: #ffffff;
+    --purple: #6b4fa5;
+    --purple-bg: #f0ebfb;
+    --purple-border: #c9b8ef;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #f0f4f8;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  .wrapper { max-width: 700px; margin: 0 auto; }
+
+  /* ヘッダー */
+  .header {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 32px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--purple);
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--purple-bg);
+    color: var(--purple);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .badge-set {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    margin-left: 8px;
+  }
+
+  .header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .header p {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  .howto {
+    background: var(--purple-bg);
+    border-left: 3px solid var(--purple);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--purple);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  /* スコアサマリー */
+  .score-section {
+    background: white;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    display: none;
+  }
+
+  .score-section.show { display: block; }
+
+  .score-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .score-item {
+    text-align: center;
+    padding: 16px 8px;
+    background: var(--gray);
+    border-radius: 10px;
+  }
+
+  .score-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--purple);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .score-label {
+    font-size: 10px;
+    color: var(--text-light);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .score-bar-wrap { margin-bottom: 8px; }
+
+  .score-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .score-bar-track {
+    height: 10px;
+    background: var(--gray);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), #a07be0);
+    border-radius: 10px;
+    transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  /* メッセージ */
+  .score-message {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.7;
+  }
+
+  .score-message.high { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .score-message.mid { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange-border); }
+  .score-message.low { background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent-mid); }
+
+  /* カテゴリセクション */
+  .category-section {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .category-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .category-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .category-desc {
+    font-size: 12.5px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    padding-left: 46px;
+    line-height: 1.6;
+  }
+
+  /* チェック項目 */
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-bottom: 6px;
+    border: 1.5px solid var(--border);
+    background: var(--gray);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+
+  .check-item:last-child { margin-bottom: 0; }
+
+  .check-item:hover { background: var(--accent-light); border-color: var(--accent-mid); }
+
+  .check-item.checked {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+  }
+
+  .check-item.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+
+  .check-item.checked .check-text {
+    color: var(--green);
+    font-weight: 500;
+  }
+
+  .check-item.na {
+    background: #f8f5ff;
+    border-color: var(--purple-border);
+  }
+
+  .check-item.na .check-box {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: white;
+    font-size: 11px;
+  }
+
+  .check-item.na .check-text {
+    color: var(--purple);
+    font-weight: 500;
+  }
+
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    transition: all 0.15s;
+    margin-top: 1px;
+    background: white;
+    color: transparent;
+  }
+
+  .check-text {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.6;
+    flex: 1;
+    transition: color 0.15s;
+  }
+
+  .check-hint {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 3px;
+    display: block;
+    font-style: italic;
+  }
+
+  /* カテゴリ別スコアバー */
+  .cat-score-bar {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .cat-score-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  .cat-score-track {
+    flex: 1;
+    height: 6px;
+    background: var(--gray);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .cat-score-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.6s ease;
+    width: 0%;
+  }
+
+  .cat-score-num {
+    font-weight: 700;
+    font-size: 13px;
+    min-width: 30px;
+    text-align: right;
+  }
+
+  /* 自由記述 */
+  .freetext-section {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .freetext-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+
+  .freetext-section p {
+    font-size: 12.5px;
+    color: var(--text-light);
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+
+  .freetext-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 7px;
+    margin-top: 14px;
+  }
+
+  .freetext-label:first-of-type { margin-top: 0; }
+
+  textarea.freetext {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 13.5px;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--dark);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: var(--gray);
+    line-height: 1.7;
+    min-height: 80px;
+  }
+
+  textarea.freetext:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(107,79,165,0.1);
+    background: white;
+  }
+
+  textarea.freetext::placeholder { color: #c0c8d4; }
+
+  /* 完了バナー */
+  .complete-banner {
+    background: linear-gradient(135deg, var(--purple-bg) 0%, var(--green-bg) 100%);
+    border: 1.5px solid var(--purple-border);
+    border-radius: 14px;
+    padding: 28px 28px;
+    text-align: center;
+    margin-bottom: 20px;
+    display: none;
+  }
+
+  .complete-banner.show { display: block; }
+
+  .complete-banner h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+
+  .complete-banner p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  /* ボタン */
+  .save-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: var(--purple);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-bottom: 12px;
+  }
+
+  .save-btn:hover { background: #5a3f95; }
+
+  .reset-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    color: var(--text-light);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 24px;
+  }
+
+  .reset-btn:hover { border-color: #ccbbee; color: var(--purple); }
+
+  /* 凡例 */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    font-size: 11.5px;
+    color: var(--text-light);
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 1.5px solid;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 11.5px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 480px) {
+    .header { padding: 24px 20px; }
+    .header h1 { font-size: 20px; }
+    .score-grid { grid-template-columns: repeat(3, 1fr); }
+    .category-section { padding: 18px 16px; }
+    .check-item { padding: 11px 12px; }
+    .freetext-section { padding: 18px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ヘッダー -->
+  <div class="header">
+    <div>
+      <span class="badge">購入者限定特典</span>
+      <span class="badge-set">30日チェックリストとセット使用</span>
+    </div>
+    <h1>30日後の自己チェックリスト</h1>
+    <p>成果ではなく、<strong>思考の変化</strong>を確認するシートです。<br>「行動できない」の本当の原因は思考にあります。<br>1ヶ月前と比べて、あなたの思考はどう変わりましたか？</p>
+    <div class="howto">
+      💡 30日間のチャレンジが終わったら、このシートを開いてください。当てはまるものにチェックを入れながら読み進めてください。正直に答えることが大切です。
+    </div>
+  </div>
+
+  <!-- スコアサマリー（チェックが入ったら表示） -->
+  <div class="score-section" id="score-section">
+    <h2>📊 あなたの変化スコア</h2>
+    <div class="score-grid">
+      <div class="score-item">
+        <div class="score-num" id="score-total">0</div>
+        <div class="score-label">チェック数</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num" id="score-pct" style="color:var(--green)">0%</div>
+        <div class="score-label">変化率</div>
+      </div>
+      <div class="score-item">
+        <div class="score-num" id="score-cats" style="color:var(--orange)">0/4</div>
+        <div class="score-label">変化カテゴリ</div>
+      </div>
+    </div>
+    <div class="score-bar-wrap">
+      <div class="score-bar-label">
+        <span>全体の変化度</span>
+        <span id="score-bar-text">0 / 20項目</span>
+      </div>
+      <div class="score-bar-track">
+        <div class="score-bar-fill" id="score-bar-fill"></div>
+      </div>
+    </div>
+    <div class="score-message" id="score-message"></div>
+  </div>
+
+  <!-- カテゴリ1：思考の癖 -->
+  <div class="category-section">
+    <div class="category-header">
+      <div class="category-icon" style="background:var(--accent-light);">🧠</div>
+      <div class="category-title">思考の癖が変わったか</div>
+    </div>
+    <p class="category-desc">行動を止めていた「頭の中の声」に気づけるようになったかを確認します。</p>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--green-bg);border-color:var(--green-border);"></div>当てはまる
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#f8f5ff;border-color:var(--purple-border);"></div>まだ途中
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--gray);border-color:var(--border);"></div>当てはまらない
+      </div>
+      <div style="font-size:11px;color:var(--text-light);margin-left:auto;">※長押しで「まだ途中」</div>
+    </div>
+
+    <div class="check-item" id="c1-1" onclick="toggle('c1-1','cat1')" oncontextmenu="naItem(event,'c1-1','cat1')" ontouchstart="touchStart('c1-1','cat1')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c1-1">✓</div>
+      <div class="check-text">「完璧にできないなら意味がない」という思考が浮かんだとき、気づけるようになった
+        <span class="check-hint">例：下書きが公開できなかった理由を説明できる</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c1-2" onclick="toggle('c1-2','cat1')" oncontextmenu="naItem(event,'c1-2','cat1')" ontouchstart="touchStart('c1-2','cat1')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c1-2">✓</div>
+      <div class="check-text">「準備ができたら始める」という言い訳が出てきたとき、自分でツッコめるようになった
+        <span class="check-hint">例：「また準備してる」と自覚できた瞬間があった</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c1-3" onclick="toggle('c1-3','cat1')" oncontextmenu="naItem(event,'c1-3','cat1')" ontouchstart="touchStart('c1-3','cat1')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c1-3">✓</div>
+      <div class="check-text">「どうせ自分には無理」という自動思考が出る頻度が、1ヶ月前より減った気がする
+        <span class="check-hint">完全になくなくなくていい。「少し減った」も正解</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c1-4" onclick="toggle('c1-4','cat1')" oncontextmenu="naItem(event,'c1-4','cat1')" ontouchstart="touchStart('c1-4','cat1')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c1-4">✓</div>
+      <div class="check-text">行動を止めていたのが「意志の弱さ」ではなく「思考のパターン」だったと腑に落ちた
+        <span class="check-hint">頭で理解だけでなく、体感として納得できているか</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c1-5" onclick="toggle('c1-5','cat1')" oncontextmenu="naItem(event,'c1-5','cat1')" ontouchstart="touchStart('c1-5','cat1')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c1-5">✓</div>
+      <div class="check-text">「考えすぎ」に入りかけたとき、立ち止まってひとつだけ動く選択ができた経験がある
+        <span class="check-hint">1回でいい。その1回が証拠</span>
+      </div>
+    </div>
+
+    <div class="cat-score-bar">
+      <div class="cat-score-row">
+        <span>🧠 思考の癖</span>
+        <div class="cat-score-track">
+          <div class="cat-score-fill" id="fill-cat1" style="background:linear-gradient(90deg,var(--accent),#6a9fd8);"></div>
+        </div>
+        <span class="cat-score-num" id="num-cat1" style="color:var(--accent)">0/5</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- カテゴリ2：行動の変化 -->
+  <div class="category-section">
+    <div class="category-header">
+      <div class="category-icon" style="background:var(--green-bg);">⚡</div>
+      <div class="category-title">行動パターンが変わったか</div>
+    </div>
+    <p class="category-desc">「動けなかった自分」から「少し動けた自分」への実績を確認します。</p>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--green-bg);border-color:var(--green-border);"></div>当てはまる
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#f8f5ff;border-color:var(--purple-border);"></div>まだ途中
+      </div>
+    </div>
+
+    <div class="check-item" id="c2-1" onclick="toggle('c2-1','cat2')" oncontextmenu="naItem(event,'c2-1','cat2')" ontouchstart="touchStart('c2-1','cat2')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c2-1">✓</div>
+      <div class="check-text">「やろうと思えばできる」ではなく、実際に何かひとつ動かした事実がある
+        <span class="check-hint">小さくていい。公開でも、1行でも、エディタを開いただけでも</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c2-2" onclick="toggle('c2-2','cat2')" oncontextmenu="naItem(event,'c2-2','cat2')" ontouchstart="touchStart('c2-2','cat2')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c2-2">✓</div>
+      <div class="check-text">「完璧な状態でなくても動いてよい」と思える場面が、1ヶ月前より増えた
+        <span class="check-hint">気持ちが変わっていなくても、行動できた回数が増えたなら◯</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c2-3" onclick="toggle('c2-3','cat2')" oncontextmenu="naItem(event,'c2-3','cat2')" ontouchstart="touchStart('c2-3','cat2')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c2-3">✓</div>
+      <div class="check-text">「次にやること」がひとつ決まっている状態で今日を終えられる日が増えた
+        <span class="check-hint">予定でも、IF-THENルールでも、何でもいい</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c2-4" onclick="toggle('c2-4','cat2')" oncontextmenu="naItem(event,'c2-4','cat2')" ontouchstart="touchStart('c2-4','cat2')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c2-4">✓</div>
+      <div class="check-text">行動できなかった日も、翌日に引きずりにくくなった（自己批判が少し和らいだ）
+        <span class="check-hint">「また失敗した」の泥沼から早く抜けられるようになったか</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c2-5" onclick="toggle('c2-5','cat2')" oncontextmenu="naItem(event,'c2-5','cat2')" ontouchstart="touchStart('c2-5','cat2')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c2-5">✓</div>
+      <div class="check-text">誰かに「最近なんか変わった？」と言われた、または自分でそう感じた瞬間があった
+        <span class="check-hint">気のせいでも、小さな変化でも、それが本物の証拠</span>
+      </div>
+    </div>
+
+    <div class="cat-score-bar">
+      <div class="cat-score-row">
+        <span>⚡ 行動変化</span>
+        <div class="cat-score-track">
+          <div class="cat-score-fill" id="fill-cat2" style="background:linear-gradient(90deg,var(--green),#4cc292);"></div>
+        </div>
+        <span class="cat-score-num" id="num-cat2" style="color:var(--green)">0/5</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- カテゴリ3：感情・自己認識 -->
+  <div class="category-section">
+    <div class="category-header">
+      <div class="category-icon" style="background:var(--orange-bg);">💭</div>
+      <div class="category-title">自己認識が変わったか</div>
+    </div>
+    <p class="category-desc">「自分はどんな人間か」という見方が、どう変わったかを確認します。</p>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--green-bg);border-color:var(--green-border);"></div>当てはまる
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#f8f5ff;border-color:var(--purple-border);"></div>まだ途中
+      </div>
+    </div>
+
+    <div class="check-item" id="c3-1" onclick="toggle('c3-1','cat3')" oncontextmenu="naItem(event,'c3-1','cat3')" ontouchstart="touchStart('c3-1','cat3')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c3-1">✓</div>
+      <div class="check-text">「動けない自分＝ダメな人間」という等式が、少し崩れてきた感覚がある
+        <span class="check-hint">自分を責める声の強さが、少し和らいだ経験があるか</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c3-2" onclick="toggle('c3-2','cat3')" oncontextmenu="naItem(event,'c3-2','cat3')" ontouchstart="touchStart('c3-2','cat3')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c3-2">✓</div>
+      <div class="check-text">自分の「行動を止めやすいパターン」（時間帯・場面・感情）が把握できてきた
+        <span class="check-hint">「夜になると考えすぎる」など、パターンが言語化できるなら◯</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c3-3" onclick="toggle('c3-3','cat3')" oncontextmenu="naItem(event,'c3-3','cat3')" ontouchstart="touchStart('c3-3','cat3')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c3-3">✓</div>
+      <div class="check-text">「妥協したくないから動けない」のか「怖いから動けない」のか、区別できるようになってきた
+        <span class="check-hint">本当の理由を正確に把握できているか</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c3-4" onclick="toggle('c3-4','cat3')" oncontextmenu="naItem(event,'c3-4','cat3')" ontouchstart="touchStart('c3-4','cat3')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c3-4">✓</div>
+      <div class="check-text">「やらない理由」を探しているときに、自分でそれに気づけるようになった
+        <span class="check-hint">言い訳を作ってしまう瞬間を、客観的に見られるようになったか</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c3-5" onclick="toggle('c3-5','cat3')" oncontextmenu="naItem(event,'c3-5','cat3')" ontouchstart="touchStart('c3-5','cat3')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c3-5">✓</div>
+      <div class="check-text">「能力はあるのに動けない」という悔しさが、少し「次への燃料」に変わりはじめている
+        <span class="check-hint">悔しさが消えなくていい。それが動く理由になっていればいい</span>
+      </div>
+    </div>
+
+    <div class="cat-score-bar">
+      <div class="cat-score-row">
+        <span>💭 自己認識</span>
+        <div class="cat-score-track">
+          <div class="cat-score-fill" id="fill-cat3" style="background:linear-gradient(90deg,var(--orange),#e8a84a);"></div>
+        </div>
+        <span class="cat-score-num" id="num-cat3" style="color:var(--orange)">0/5</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- カテゴリ4：仕組み・習慣 -->
+  <div class="category-section">
+    <div class="category-header">
+      <div class="category-icon" style="background:var(--purple-bg);">🔧</div>
+      <div class="category-title">仕組みができてきたか</div>
+    </div>
+    <p class="category-desc">「気合い」ではなく「設計」で動ける状態に近づいているかを確認します。</p>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--green-bg);border-color:var(--green-border);"></div>当てはまる
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#f8f5ff;border-color:var(--purple-border);"></div>まだ途中
+      </div>
+    </div>
+
+    <div class="check-item" id="c4-1" onclick="toggle('c4-1','cat4')" oncontextmenu="naItem(event,'c4-1','cat4')" ontouchstart="touchStart('c4-1','cat4')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c4-1">✓</div>
+      <div class="check-text">「毎日やること」がひとつでも決まっていて、それを実行できている日が週の半分以上ある
+        <span class="check-hint">完璧でなくていい。「だいたいやれている」なら◯</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c4-2" onclick="toggle('c4-2','cat4')" oncontextmenu="naItem(event,'c4-1','cat4')" ontouchstart="touchStart('c4-2','cat4')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c4-2">✓</div>
+      <div class="check-text">「〇〇したら△△する」というIF-THENルールが、自分なりに1つ以上作れている
+        <span class="check-hint">例：「電車に乗ったら記事の構成を考える」など</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c4-3" onclick="toggle('c4-3','cat4')" oncontextmenu="naItem(event,'c4-3','cat4')" ontouchstart="touchStart('c4-3','cat4')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c4-3">✓</div>
+      <div class="check-text">行動のハードルを自分で小さくする感覚（「5分だけ」「1行だけ」）が身についてきた
+        <span class="check-hint">「ハードルを下げること＝サボり」ではないと体感できているか</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c4-4" onclick="toggle('c4-4','cat4')" oncontextmenu="naItem(event,'c4-4','cat4')" ontouchstart="touchStart('c4-4','cat4')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c4-4">✓</div>
+      <div class="check-text">「やる気が出たら始める」から「始めれば気分が変わる」に発想が変わりつつある
+        <span class="check-hint">行動→感情の順番に気づいた経験があるか</span>
+      </div>
+    </div>
+
+    <div class="check-item" id="c4-5" onclick="toggle('c4-5','cat4')" oncontextmenu="naItem(event,'c4-5','cat4')" ontouchstart="touchStart('c4-5','cat4')" ontouchend="touchEnd()" ontouchmove="touchEnd()">
+      <div class="check-box" id="box-c4-5">✓</div>
+      <div class="check-text">「次の30日」も、何かひとつ続けることが具体的に思い浮かぶ
+        <span class="check-hint">漠然とした「がんばろう」ではなく、具体的な行動が見えているか</span>
+      </div>
+    </div>
+
+    <div class="cat-score-bar">
+      <div class="cat-score-row">
+        <span>🔧 仕組み化</span>
+        <div class="cat-score-track">
+          <div class="cat-score-fill" id="fill-cat4" style="background:linear-gradient(90deg,var(--purple),#a07be0);"></div>
+        </div>
+        <span class="cat-score-num" id="num-cat4" style="color:var(--purple)">0/5</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 自由記述 -->
+  <div class="freetext-section">
+    <h2>✏️ 30日間の記録</h2>
+    <p>チェック以外の変化や気づき、正直な感想を書き残してください。書くこと自体が、次の30日への出発点になります。</p>
+
+    <div class="freetext-label">📌 1ヶ月前の自分と、今の自分。一番変わったと思うことは？</div>
+    <textarea class="freetext" id="ft1" rows="3" placeholder="例：「下書きが増えていくのが当たり前だったのに、1本公開できた」「自分を責める時間が減った気がする」" oninput="saveFreetext()"></textarea>
+
+    <div class="freetext-label">📌 この30日間で、一番小さくても「動けた」と思う瞬間は？</div>
+    <textarea class="freetext" id="ft2" rows="3" placeholder="例：「深夜に1行だけ書いた」「タイトルだけ決めた」「エディタを開いただけで閉じた、でも開いた」" oninput="saveFreetext()"></textarea>
+
+    <div class="freetext-label">📌 次の30日で、たったひとつだけやることを決めるとしたら？</div>
+    <textarea class="freetext" id="ft3" rows="3" placeholder="例：「週2回、記事を1本ずつ公開する」「毎朝5分だけ書く時間を作る」" oninput="saveFreetext()"></textarea>
+  </div>
+
+  <!-- 完了バナー -->
+  <div class="complete-banner" id="complete-banner">
+    <h2>🎉 30日間、本当にお疲れさまでした</h2>
+    <p>あなたがこのシートを開いたということは、<br>30日間、何かを続けたということです。<br><br>「やろうと思えばできる」と思い続けた自分から、<br>「動いた」という事実を持った自分へ。<br><br>その差は、今日ここに積み上がっています。<br>次の30日も、小さく、確実に。</p>
+  </div>
+
+  <!-- ボタン -->
+  <button class="save-btn" onclick="saveAndShow()">✅ 記録を保存して変化を確認する</button>
+  <button class="reset-btn" onclick="confirmReset()">🔄 記録をリセットする</button>
+
+  <div class="footer">
+    正直にチェックした数が、あなたの今の正直な変化です。<br>
+    少なくても、落ち込まないでください。気づいたことが、すでに変化の証拠です。
+  </div>
+
+</div>
+
+<script>
+  const STORAGE_KEY = 'selfCheck30';
+
+  // カテゴリ別チェック数管理
+  const cats = { cat1: 0, cat2: 0, cat3: 0, cat4: 0 };
+  const catMax = { cat1: 5, cat2: 5, cat3: 5, cat4: 5 };
+
+  // 各アイテムの状態: 0=未 1=チェック 2=途中(NA)
+  let checks = {};
+  let freetexts = { ft1: '', ft2: '', ft3: '' };
+  let saved = false;
+
+  function loadState() {
+    try {
+      const s = localStorage.getItem(STORAGE_KEY);
+      if (s) {
+        const parsed = JSON.parse(s);
+        checks = parsed.checks || {};
+        freetexts = parsed.freetexts || { ft1: '', ft2: '', ft3: '' };
+        saved = parsed.saved || false;
+      }
+    } catch(e) {}
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ checks, freetexts, saved }));
+    } catch(e) {}
+  }
+
+  // チェックアイテム操作
+  function toggle(id, cat) {
+    const current = checks[id] || 0;
+    checks[id] = current === 1 ? 0 : 1;
+    saveState();
+    renderItem(id);
+    updateCatScore(cat);
+    updateTotal();
+  }
+
+  function naItem(e, id, cat) {
+    if (e) e.preventDefault();
+    const current = checks[id] || 0;
+    checks[id] = current === 2 ? 0 : 2;
+    saveState();
+    renderItem(id);
+    updateCatScore(cat);
+    updateTotal();
+  }
+
+  // 長押し対応
+  let pressTimer = null;
+  let pressId = null;
+  let pressCat = null;
+
+  function touchStart(id, cat) {
+    pressId = id; pressCat = cat;
+    pressTimer = setTimeout(() => {
+      naItem(null, pressId, pressCat);
+    }, 600);
+  }
+
+  function touchEnd() {
+    clearTimeout(pressTimer);
+  }
+
+  function renderItem(id) {
+    const item = document.getElementById(id);
+    const box = document.getElementById('box-' + id);
+    if (!item || !box) return;
+    const state = checks[id] || 0;
+    item.classList.remove('checked', 'na');
+    if (state === 1) { item.classList.add('checked'); box.textContent = '✓'; }
+    else if (state === 2) { item.classList.add('na'); box.textContent = '△'; }
+    else { box.textContent = '✓'; box.style.color = 'transparent'; }
+    if (state !== 0) box.style.color = '';
+  }
+
+  function updateCatScore(cat) {
+    const ids = getCatIds(cat);
+    const count = ids.filter(id => (checks[id] || 0) === 1).length;
+    const fill = document.getElementById('fill-' + cat);
+    const num = document.getElementById('num-' + cat);
+    if (fill) fill.style.width = (count / catMax[cat] * 100) + '%';
+    if (num) num.textContent = count + '/' + catMax[cat];
+  }
+
+  function getCatIds(cat) {
+    const n = cat.replace('cat','');
+    return [1,2,3,4,5].map(i => 'c'+n+'-'+i);
+  }
+
+  function updateTotal() {
+    const allIds = ['c1-1','c1-2','c1-3','c1-4','c1-5',
+                    'c2-1','c2-2','c2-3','c2-4','c2-5',
+                    'c3-1','c3-2','c3-3','c3-4','c3-5',
+                    'c4-1','c4-2','c4-3','c4-4','c4-5'];
+    const total = allIds.filter(id => (checks[id] || 0) === 1).length;
+    const pct = Math.round(total / 20 * 100);
+
+    // カテゴリ別に1つ以上チェックある数
+    const activeCats = ['cat1','cat2','cat3','cat4'].filter(cat => {
+      return getCatIds(cat).some(id => (checks[id] || 0) === 1);
+    }).length;
+
+    document.getElementById('score-total').textContent = total;
+    document.getElementById('score-pct').textContent = pct + '%';
+    document.getElementById('score-cats').textContent = activeCats + '/4';
+    document.getElementById('score-bar-fill').style.width = pct + '%';
+    document.getElementById('score-bar-text').textContent = total + ' / 20項目';
+
+    // メッセージ
+    const msgEl = document.getElementById('score-message');
+    if (total >= 15) {
+      msgEl.className = 'score-message high';
+      msgEl.textContent = '思考が大きく変わっています。1ヶ月前のあなたと、今のあなたは、もう別の人です。この変化を、次の30日に持ち越してください。';
+    } else if (total >= 8) {
+      msgEl.className = 'score-message mid';
+      msgEl.textContent = '確実に変わっています。まだチェックできていない項目が、次の30日のテーマです。焦らなくていい。変化は積み上がっています。';
+    } else {
+      msgEl.className = 'score-message low';
+      msgEl.textContent = 'チェックが少なくても、落ち込まないでください。このシートを開いたこと自体が、変化の始まりです。「気づいた」ことが、すでに1ヶ月前との違いです。';
+    }
+
+    // スコアセクション表示
+    if (total > 0) {
+      document.getElementById('score-section').classList.add('show');
+    }
+
+    // 完了バナー
+    document.getElementById('complete-banner').classList.toggle('show', total >= 16);
+  }
+
+  function saveFreetext() {
+    freetexts.ft1 = document.getElementById('ft1').value;
+    freetexts.ft2 = document.getElementById('ft2').value;
+    freetexts.ft3 = document.getElementById('ft3').value;
+    saveState();
+  }
+
+  function saveAndShow() {
+    saveFreetext();
+    saved = true;
+    saveState();
+    updateTotal();
+    // スコアセクションへスクロール
+    document.getElementById('score-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function confirmReset() {
+    if (confirm('記録をリセットしますか？\nこの操作は元に戻せません。')) {
+      checks = {};
+      freetexts = { ft1: '', ft2: '', ft3: '' };
+      saved = false;
+      saveState();
+      renderAll();
+    }
+  }
+
+  function renderAll() {
+    const allIds = ['c1-1','c1-2','c1-3','c1-4','c1-5',
+                    'c2-1','c2-2','c2-3','c2-4','c2-5',
+                    'c3-1','c3-2','c3-3','c3-4','c3-5',
+                    'c4-1','c4-2','c4-3','c4-4','c4-5'];
+    allIds.forEach(id => renderItem(id));
+    ['cat1','cat2','cat3','cat4'].forEach(cat => updateCatScore(cat));
+    updateTotal();
+
+    document.getElementById('ft1').value = freetexts.ft1 || '';
+    document.getElementById('ft2').value = freetexts.ft2 || '';
+    document.getElementById('ft3').value = freetexts.ft3 || '';
+
+    if (saved) {
+      document.getElementById('score-section').classList.add('show');
+    }
+    document.getElementById('complete-banner').classList.toggle('show', false);
+  }
+
+  // 初期化
+  loadState();
+  renderAll();
+</script>
+</body>
+</html>

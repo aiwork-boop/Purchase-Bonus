@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>最小行動30日チェックリスト｜購入者限定特典</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1a1a2e;
+    --accent: #4a6fa5;
+    --accent-light: #e8f0fb;
+    --accent-mid: #c5d8f5;
+    --green: #2d8a60;
+    --green-bg: #eaf6f0;
+    --green-border: #a3d9bf;
+    --green-light: #d4eddf;
+    --orange: #c9860a;
+    --orange-bg: #fef9e7;
+    --orange-border: #f0d070;
+    --gray: #f5f7fa;
+    --border: #dde3ec;
+    --text: #2d3748;
+    --text-light: #718096;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #f0f4f8;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  .wrapper { max-width: 700px; margin: 0 auto; }
+
+  /* ヘッダー */
+  .header {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 32px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--accent);
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .header p {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  .howto {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  /* 設定エリア */
+  .setup-section {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .setup-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+
+  .action-input-wrap {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .action-input {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .action-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(74,111,165,0.1);
+  }
+
+  .action-input::placeholder { color: #c0c8d4; }
+
+  .set-btn {
+    padding: 11px 18px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .set-btn:hover { background: #3a5f95; }
+
+  .current-action {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 500;
+    display: none;
+  }
+
+  .current-action.show { display: block; }
+
+  /* 統計エリア */
+  .stats-section {
+    background: white;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 14px 8px;
+    background: var(--gray);
+    border-radius: 10px;
+  }
+
+  .stat-num {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-num.green { color: var(--green); }
+  .stat-num.orange { color: var(--orange); }
+
+  .stat-label {
+    font-size: 10px;
+    color: var(--text-light);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  /* 進捗バー */
+  .progress-wrap { margin-bottom: 4px; }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .progress-track {
+    height: 10px;
+    background: var(--gray);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #6a9fd8);
+    border-radius: 10px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  /* カレンダーグリッド */
+  .calendar-section {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .calendar-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+
+  .day-cell {
+    aspect-ratio: 1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid var(--border);
+    background: var(--gray);
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  .day-cell:hover { border-color: var(--accent-mid); background: var(--accent-light); }
+
+  .day-cell.done {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+  }
+
+  .day-cell.done .day-num-text { color: var(--green); }
+  .day-cell.done .day-check { opacity: 1; }
+
+  .day-cell.skipped {
+    background: #fff5f5;
+    border-color: #ffcccc;
+  }
+
+  .day-cell.skipped .day-num-text { color: #cc6666; }
+
+  .day-cell.future {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .day-cell.future:hover { border-color: var(--border); background: var(--gray); }
+
+  .day-num-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-light);
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+
+  .day-check {
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .day-skip {
+    font-size: 10px;
+    color: #cc6666;
+    display: none;
+  }
+
+  .day-cell.skipped .day-skip { display: block; }
+  .day-cell.skipped .day-check { display: none; }
+
+  /* 週区切りラベル */
+  .week-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-light);
+    text-align: center;
+    padding: 4px 0;
+  }
+
+  /* メモ欄 */
+  .memo-section {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .memo-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+
+  .memo-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .memo-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .memo-day-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 48px;
+    padding-top: 10px;
+    flex-shrink: 0;
+  }
+
+  .memo-input {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 13px;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--dark);
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s;
+    line-height: 1.5;
+  }
+
+  .memo-input:focus { border-color: var(--accent); }
+  .memo-input::placeholder { color: #c0c8d4; }
+
+  /* 週ごとの振り返り */
+  .weekly-section {
+    background: white;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .weekly-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+
+  .weekly-cards { display: flex; flex-direction: column; gap: 12px; }
+
+  .weekly-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .weekly-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--gray);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .weekly-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  .weekly-score {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+
+  .weekly-body {
+    padding: 14px 16px;
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .weekly-card.open .weekly-body { display: block; }
+
+  .weekly-dots {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .weekly-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--gray);
+    color: var(--text-light);
+    border: 1.5px solid var(--border);
+  }
+
+  .weekly-dot.done { background: var(--green-bg); color: var(--green); border-color: var(--green-border); }
+  .weekly-dot.skip { background: #fff5f5; color: #cc6666; border-color: #ffcccc; }
+
+  .weekly-review-input {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: var(--dark);
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+
+  .weekly-review-input:focus { border-color: var(--accent); }
+  .weekly-review-input::placeholder { color: #c0c8d4; }
+
+  /* 完了バナー */
+  .complete-banner {
+    background: linear-gradient(135deg, #2d8a60, #4a9a80);
+    border-radius: 14px;
+    padding: 28px 24px;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    display: none;
+    box-shadow: 0 4px 20px rgba(45,138,96,0.3);
+  }
+
+  .complete-banner.show { display: block; }
+
+  .complete-banner h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .complete-banner p {
+    font-size: 13.5px;
+    line-height: 1.8;
+    opacity: 0.95;
+  }
+
+  /* リセットボタン */
+  .reset-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 24px;
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text-light);
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:hover { border-color: #cc6666; color: #cc6666; }
+
+  .footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 11.5px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 480px) {
+    .header { padding: 24px 20px; }
+    .header h1 { font-size: 20px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .calendar-grid { gap: 5px; }
+    .day-num-text { font-size: 11px; }
+    .day-check { font-size: 12px; }
+    .action-input-wrap { flex-direction: column; }
+    .set-btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ヘッダー -->
+  <div class="header">
+    <div class="badge">購入者限定特典</div>
+    <h1>最小行動30日チェックリスト</h1>
+    <p>毎日1つチェックするだけで、継続が目に見えます。<br>成果ではなく「動いた回数」だけを見てください。それだけで変わります。</p>
+    <div class="howto">
+      💡 まず「今日やる最小行動」を入力してください。あとは毎日チェックを押すだけです。
+    </div>
+  </div>
+
+  <!-- 設定 -->
+  <div class="setup-section">
+    <h2>⚡ 今月の最小行動を決める</h2>
+    <div class="action-input-wrap">
+      <input class="action-input" id="action-input" type="text" placeholder="例：タイトルを1つ書く　／　1行だけ書く　／　エディタを開く" />
+      <button class="set-btn" onclick="setAction()">セット</button>
+    </div>
+    <div class="current-action" id="current-action"></div>
+  </div>
+
+  <!-- 統計 -->
+  <div class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num green" id="stat-done">0</div>
+        <div class="stat-label">完了日数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-remain">30</div>
+        <div class="stat-label">残り日数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num orange" id="stat-streak">0</div>
+        <div class="stat-label">連続日数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="stat-rate">0%</div>
+        <div class="stat-label">達成率</div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>30日間の進捗</span>
+        <span id="progress-text">0 / 30日</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- カレンダー -->
+  <div class="calendar-section">
+    <h2>📅 30日カレンダー</h2>
+    <div class="calendar-grid" id="calendar-grid"></div>
+    <div style="display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-light);">
+        <div style="width:14px;height:14px;border-radius:3px;background:var(--green-bg);border:1.5px solid var(--green-border);"></div>完了
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-light);">
+        <div style="width:14px;height:14px;border-radius:3px;background:#fff5f5;border:1.5px solid #ffcccc;"></div>スキップ
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-light);">
+        <div style="width:14px;height:14px;border-radius:3px;background:var(--gray);border:1.5px solid var(--border);"></div>未チェック
+      </div>
+      <div style="font-size:11px;color:var(--text-light);margin-left:auto;">※ 長押しでスキップ記録</div>
+    </div>
+  </div>
+
+  <!-- 週ごとの振り返り -->
+  <div class="weekly-section">
+    <h2>📝 週ごとの振り返り</h2>
+    <div class="weekly-cards" id="weekly-cards"></div>
+  </div>
+
+  <!-- 完了バナー -->
+  <div class="complete-banner" id="complete-banner">
+    <h2>🎉 30日、完走しました</h2>
+    <p>「どうせ続かない」と思っていたかもしれません。<br>でも、あなたは30日間動きました。<br><br>成果より先に、動いた事実が積み上がっています。<br>これが、変わった証拠です。</p>
+  </div>
+
+  <!-- リセット -->
+  <button class="reset-btn" onclick="confirmReset()">🔄 30日間をリセットする</button>
+
+  <div class="footer">
+    途中でスキップした日があっても大丈夫です。<br>
+    評価するのは「何回動いたか」だけです。完走より戻ることの方が大事です。
+  </div>
+
+</div>
+
+<script>
+  const STORAGE_KEY = 'minAction30';
+  let state = {
+    action: '',
+    days: new Array(30).fill(0), // 0:未 1:完了 2:スキップ
+    weeklyReviews: ['','','','',''],
+  };
+
+  function loadState() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) state = { ...state, ...JSON.parse(saved) };
+    } catch(e) {}
+  }
+
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+  }
+
+  function setAction() {
+    const val = document.getElementById('action-input').value.trim();
+    if (!val) return;
+    state.action = val;
+    saveState();
+    renderActionDisplay();
+  }
+
+  function renderActionDisplay() {
+    const el = document.getElementById('current-action');
+    if (state.action) {
+      el.textContent = '✅ 今月の最小行動：「' + state.action + '」';
+      el.classList.add('show');
+      document.getElementById('action-input').value = state.action;
+    } else {
+      el.classList.remove('show');
+    }
+  }
+
+  function buildCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    grid.innerHTML = '';
+    for (let i = 0; i < 30; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'day-cell';
+      cell.id = 'cell-' + i;
+      cell.innerHTML = `
+        <div class="day-num-text">${i+1}</div>
+        <div class="day-check">✓</div>
+        <div class="day-skip">skip</div>
+      `;
+      cell.addEventListener('click', () => toggleDay(i));
+      cell.addEventListener('contextmenu', (e) => { e.preventDefault(); skipDay(i); });
+
+      // 長押し
+      let pressTimer;
+      cell.addEventListener('touchstart', () => { pressTimer = setTimeout(() => skipDay(i), 600); });
+      cell.addEventListener('touchend', () => clearTimeout(pressTimer));
+      cell.addEventListener('touchmove', () => clearTimeout(pressTimer));
+
+      grid.appendChild(cell);
+    }
+  }
+
+  function toggleDay(i) {
+    if (state.days[i] === 2) { state.days[i] = 0; }
+    else if (state.days[i] === 1) { state.days[i] = 0; }
+    else { state.days[i] = 1; }
+    saveState();
+    renderAll();
+  }
+
+  function skipDay(i) {
+    state.days[i] = state.days[i] === 2 ? 0 : 2;
+    saveState();
+    renderAll();
+  }
+
+  function renderCalendar() {
+    state.days.forEach((val, i) => {
+      const cell = document.getElementById('cell-' + i);
+      if (!cell) return;
+      cell.classList.remove('done', 'skipped');
+      if (val === 1) cell.classList.add('done');
+      if (val === 2) cell.classList.add('skipped');
+    });
+  }
+
+  function calcStats() {
+    const done = state.days.filter(d => d === 1).length;
+    const remain = 30 - state.days.filter(d => d !== 0).length;
+    const rate = Math.round(done / 30 * 100);
+
+    // 連続日数（最後の連続）
+    let streak = 0;
+    for (let i = 29; i >= 0; i--) {
+      if (state.days[i] === 1) streak++;
+      else break;
+    }
+
+    return { done, remain, rate, streak };
+  }
+
+  function renderStats() {
+    const { done, remain, rate, streak } = calcStats();
+    document.getElementById('stat-done').textContent = done;
+    document.getElementById('stat-remain').textContent = remain;
+    document.getElementById('stat-streak').textContent = streak;
+    document.getElementById('stat-rate').textContent = rate + '%';
+    document.getElementById('progress-fill').style.width = rate + '%';
+    document.getElementById('progress-text').textContent = done + ' / 30日';
+
+    const allDone = done === 30;
+    document.getElementById('complete-banner').classList.toggle('show', allDone);
+  }
+
+  function buildWeekly() {
+    const container = document.getElementById('weekly-cards');
+    container.innerHTML = '';
+    for (let w = 0; w < 5; w++) {
+      const start = w * 7;
+      const end = Math.min(start + 6, 29);
+      const card = document.createElement('div');
+      card.className = 'weekly-card';
+      card.id = 'weekly-' + w;
+
+      const dots = Array.from({length: end - start + 1}, (_, i) => {
+        const di = start + i;
+        const cls = state.days[di] === 1 ? 'done' : state.days[di] === 2 ? 'skip' : '';
+        const icon = state.days[di] === 1 ? '✓' : state.days[di] === 2 ? '×' : (di+1);
+        return `<div class="weekly-dot ${cls}">${icon}</div>`;
+      }).join('');
+
+      const weekDone = state.days.slice(start, end+1).filter(d => d === 1).length;
+      const weekTotal = end - start + 1;
+      const scoreColor = weekDone >= weekTotal * 0.8 ? 'background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)' : weekDone > 0 ? 'background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border)' : 'background:var(--gray);color:var(--text-light)';
+
+      card.innerHTML = `
+        <div class="weekly-header" onclick="toggleWeekly(${w})">
+          <div class="weekly-title">第${w+1}週（Day ${start+1}〜${end+1}）</div>
+          <div class="weekly-score" style="${scoreColor}">${weekDone} / ${weekTotal}日</div>
+        </div>
+        <div class="weekly-body">
+          <div class="weekly-dots">${dots}</div>
+          <textarea class="weekly-review-input" rows="2" placeholder="この週の気づき・続けてみての感想を書く（任意）" oninput="saveWeeklyReview(${w}, this.value)">${state.weeklyReviews[w] || ''}</textarea>
+        </div>
+      `;
+      container.appendChild(card);
+    }
+  }
+
+  function toggleWeekly(w) {
+    const card = document.getElementById('weekly-' + w);
+    card.classList.toggle('open');
+  }
+
+  function saveWeeklyReview(w, val) {
+    state.weeklyReviews[w] = val;
+    saveState();
+  }
+
+  function confirmReset() {
+    if (confirm('30日間の記録をリセットしますか？\nこの操作は元に戻せません。')) {
+      state.days = new Array(30).fill(0);
+      state.weeklyReviews = ['','','','',''];
+      saveState();
+      renderAll();
+    }
+  }
+
+  function renderAll() {
+    renderCalendar();
+    renderStats();
+    buildWeekly();
+  }
+
+  // 初期化
+  loadState();
+  buildCalendar();
+  renderActionDisplay();
+  renderAll();
+</script>
+</body>
+</html>
