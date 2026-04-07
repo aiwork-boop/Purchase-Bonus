@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>思考ブレーキ診断シート｜購入者限定特典</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1a1a2e;
+    --accent: #4a6fa5;
+    --accent-light: #e8f0fb;
+    --a-color: #3a86b0;
+    --a-bg: #e8f4f8;
+    --a-border: #a8d4e6;
+    --b-color: #c9860a;
+    --b-bg: #fef9e7;
+    --b-border: #f0d070;
+    --c-color: #9b4da0;
+    --c-bg: #fdf2f8;
+    --c-border: #d7a8d0;
+    --gray: #f5f7fa;
+    --border: #dde3ec;
+    --text: #2d3748;
+    --text-light: #718096;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #f0f4f8;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  .wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* ヘッダー */
+  .header {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 32px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 4px solid var(--accent);
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .header h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .header p {
+    font-size: 13.5px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+
+  /* 使い方 */
+  .howto {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* セクション */
+  .section {
+    background: white;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+  }
+
+  .section-header.a { background: var(--a-bg); border-bottom: 1px solid var(--a-border); }
+  .section-header.b { background: var(--b-bg); border-bottom: 1px solid var(--b-border); }
+  .section-header.c { background: var(--c-bg); border-bottom: 1px solid var(--c-border); }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .label-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .label-badge.a { background: var(--a-color); color: white; }
+  .label-badge.b { background: var(--b-color); color: white; }
+  .label-badge.c { background: var(--c-color); color: white; }
+
+  .section-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--dark);
+  }
+
+  .section-count {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  .count-num {
+    font-size: 22px;
+    font-weight: 700;
+    min-width: 28px;
+    text-align: right;
+    transition: all 0.2s;
+  }
+
+  .count-num.a { color: var(--a-color); }
+  .count-num.b { color: var(--b-color); }
+  .count-num.c { color: var(--c-color); }
+
+  /* 質問アイテム */
+  .question-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .question-item:last-child { border-bottom: none; }
+  .question-item:hover { background: var(--gray); }
+  .question-item.checked.a { background: #eef6fb; }
+  .question-item.checked.b { background: #fefae8; }
+  .question-item.checked.c { background: #fdf4fb; }
+
+  .checkbox {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .question-item.checked.a .checkbox { background: var(--a-color); border-color: var(--a-color); }
+  .question-item.checked.b .checkbox { background: var(--b-color); border-color: var(--b-color); }
+  .question-item.checked.c .checkbox { background: var(--c-color); border-color: var(--c-color); }
+
+  .checkmark {
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .question-item.checked .checkmark { opacity: 1; }
+
+  .question-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text);
+    user-select: none;
+  }
+
+  .question-item.checked .question-text { color: var(--dark); font-weight: 500; }
+
+  /* 結果エリア */
+  .result-area {
+    background: white;
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-top: 20px;
+  }
+
+  .result-area h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* 集計バー */
+  .tally-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .bar-label {
+    width: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 10px;
+    background: var(--gray);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+  }
+
+  .bar-fill.a { background: var(--a-color); }
+  .bar-fill.b { background: var(--b-color); }
+  .bar-fill.c { background: var(--c-color); }
+
+  .bar-num {
+    width: 40px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .bar-num.a { color: var(--a-color); }
+  .bar-num.b { color: var(--b-color); }
+  .bar-num.c { color: var(--c-color); }
+
+  /* 診断結果カード */
+  .diagnosis-card {
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: none;
+  }
+
+  .diagnosis-card.show { display: block; }
+  .diagnosis-card.a { background: var(--a-bg); border: 1px solid var(--a-border); }
+  .diagnosis-card.b { background: var(--b-bg); border: 1px solid var(--b-border); }
+  .diagnosis-card.c { background: var(--c-bg); border: 1px solid var(--c-border); }
+  .diagnosis-card.mixed { background: var(--gray); border: 1px solid var(--border); }
+
+  .diagnosis-type {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+
+  .diagnosis-type.a { color: var(--a-color); }
+  .diagnosis-type.b { color: var(--b-color); }
+  .diagnosis-type.c { color: var(--c-color); }
+  .diagnosis-type.mixed { color: var(--text-light); }
+
+  .diagnosis-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+  }
+
+  .diagnosis-desc {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  .diagnosis-action {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: white;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  /* まだ未回答 */
+  .pending-msg {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-light);
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+
+  /* フッター */
+  .footer {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 11.5px;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ヘッダー -->
+  <div class="header">
+    <div class="badge">購入者限定特典</div>
+    <h1>思考ブレーキ診断シート</h1>
+    <p>自分を止めているブレーキタイプが、1分で分かる診断です。<br>各項目をタップ（クリック）してチェックを入れてください。</p>
+    <div class="howto">
+      💡 チェックを入れると自動で集計されます。全項目に回答すると診断結果が表示されます。
+    </div>
+  </div>
+
+  <!-- セクションA -->
+  <div class="section">
+    <div class="section-header a">
+      <div class="section-label">
+        <div class="label-badge a">A</div>
+        <div class="section-name">セクションA　（各1点）</div>
+      </div>
+      <div class="section-count">
+        <span class="count-num a" id="count-a">0</span>
+        <span>/ 5</span>
+      </div>
+    </div>
+    <div id="section-a">
+      <div class="question-item a" onclick="toggle(this,'a')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">何かを始めるとき「ちゃんとやらなきゃ」という言葉が頭に浮かぶ</div>
+      </div>
+      <div class="question-item a" onclick="toggle(this,'a')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">中途半端に終わることが強く嫌だ</div>
+      </div>
+      <div class="question-item a" onclick="toggle(this,'a')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">正解や答えが見えないと動けない</div>
+      </div>
+      <div class="question-item a" onclick="toggle(this,'a')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">完璧な状態になってから公開・提出しようと思う</div>
+      </div>
+      <div class="question-item a" onclick="toggle(this,'a')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">準備に時間をかけすぎて、本番に入れないことがある</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- セクションB -->
+  <div class="section">
+    <div class="section-header b">
+      <div class="section-label">
+        <div class="label-badge b">B</div>
+        <div class="section-name">セクションB　（各1点）</div>
+      </div>
+      <div class="section-count">
+        <span class="count-num b" id="count-b">0</span>
+        <span>/ 5</span>
+      </div>
+    </div>
+    <div id="section-b">
+      <div class="question-item b" onclick="toggle(this,'b')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">「やらなきゃ」と思うほど、やる気がなくなる</div>
+      </div>
+      <div class="question-item b" onclick="toggle(this,'b')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">自分で決めたのに「やらされている」感覚になる</div>
+      </div>
+      <div class="question-item b" onclick="toggle(this,'b')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">「すべき」「しなきゃ」が口癖になっている</div>
+      </div>
+      <div class="question-item b" onclick="toggle(this,'b')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">タスクを見るだけで重くなる感覚がある</div>
+      </div>
+      <div class="question-item b" onclick="toggle(this,'b')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">義務感でやると、続かないことが多い</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- セクションC -->
+  <div class="section">
+    <div class="section-header c">
+      <div class="section-label">
+        <div class="label-badge c">C</div>
+        <div class="section-name">セクションC　（各1点）</div>
+      </div>
+      <div class="section-count">
+        <span class="count-num c" id="count-c">0</span>
+        <span>/ 5</span>
+      </div>
+    </div>
+    <div id="section-c">
+      <div class="question-item c" onclick="toggle(this,'c')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">「どうせ続かない」と始める前から思う</div>
+      </div>
+      <div class="question-item c" onclick="toggle(this,'c')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">過去に失敗した経験が、新しい行動を止める</div>
+      </div>
+      <div class="question-item c" onclick="toggle(this,'c')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">「今さら遅すぎる」と感じることがある</div>
+      </div>
+      <div class="question-item c" onclick="toggle(this,'c')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">他の人が結果を出しているのを見ると「自分には無理」と思う</div>
+      </div>
+      <div class="question-item c" onclick="toggle(this,'c')">
+        <div class="checkbox"><svg class="checkmark" viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9.5 10.5,2.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="question-text">行動する前に「意味があるのか」が気になって止まる</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 結果エリア -->
+  <div class="result-area">
+    <h2>📊 診断結果</h2>
+
+    <div class="tally-bars">
+      <div class="bar-row">
+        <div class="bar-label" style="color:var(--a-color);font-weight:700;">A：完璧主義</div>
+        <div class="bar-track"><div class="bar-fill a" id="bar-a"></div></div>
+        <div class="bar-num a" id="bar-num-a">0 / 5</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" style="color:var(--b-color);font-weight:700;">B：義務感</div>
+        <div class="bar-track"><div class="bar-fill b" id="bar-b"></div></div>
+        <div class="bar-num b" id="bar-num-b">0 / 5</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" style="color:var(--c-color);font-weight:700;">C：自己否定</div>
+        <div class="bar-track"><div class="bar-fill c" id="bar-c"></div></div>
+        <div class="bar-num c" id="bar-num-c">0 / 5</div>
+      </div>
+    </div>
+
+    <!-- 未回答メッセージ -->
+    <div class="pending-msg" id="pending-msg">
+      上のチェックリストに回答すると、<br>あなたのブレーキタイプが表示されます。
+    </div>
+
+    <!-- 診断カードA -->
+    <div class="diagnosis-card a" id="result-a">
+      <div class="diagnosis-type a">A が最多　→　あなたのブレーキタイプ</div>
+      <div class="diagnosis-title">完璧主義タイプ</div>
+      <div class="diagnosis-desc">「正解が見えてから動く」という癖が行動を止めています。完璧な準備が整うことは永遠にありません。「100点でなくていい、まず動く」という思考への切り替えが最初のステップです。</div>
+      <div class="diagnosis-action">📖 本編の第3章「最低ライン思考テンプレート」から始めてください</div>
+    </div>
+
+    <!-- 診断カードB -->
+    <div class="diagnosis-card b" id="result-b">
+      <div class="diagnosis-type b">B が最多　→　あなたのブレーキタイプ</div>
+      <div class="diagnosis-title">義務感タイプ</div>
+      <div class="diagnosis-desc">「やらなきゃ」という言葉が行動へのやる気を根本から奪っています。強制を選択に変えるだけで、体の動きが変わります。「やらなきゃ」を「やってもいい」に言い換えることから始めてください。</div>
+      <div class="diagnosis-action">📖 本編の第3章「許可思考テンプレート」から始めてください</div>
+    </div>
+
+    <!-- 診断カードC -->
+    <div class="diagnosis-card c" id="result-c">
+      <div class="diagnosis-type c">C が最多　→　あなたのブレーキタイプ</div>
+      <div class="diagnosis-title">自己否定タイプ</div>
+      <div class="diagnosis-desc">「どうせ無理」という思考が、行動の前に終了判定を出しています。この思考の怖さは「事実のように感じられる」ことです。「試してみる」という実験思考に切り替えることで、動けるようになります。</div>
+      <div class="diagnosis-action">📖 本編の第3章「実験思考テンプレート」から始めてください</div>
+    </div>
+
+    <!-- 複合タイプ -->
+    <div class="diagnosis-card mixed" id="result-mixed">
+      <div class="diagnosis-type mixed">複数が同数　→　あなたのブレーキタイプ</div>
+      <div class="diagnosis-title">複合タイプ</div>
+      <div class="diagnosis-desc">3つのブレーキが同時に発動している状態です。最も多くチェックが入ったセクションのテンプレートから順に取り組んでください。第2章のワークで自分のパターンをさらに深掘りできます。</div>
+      <div class="diagnosis-action">📖 本編の第2章のワークから自分のパターンを特定してください</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    診断後は本編の該当章のワークに取り組んでください。<br>
+    思考を特定できれば、変えられます。
+  </div>
+
+</div>
+
+<script>
+  const counts = { a: 0, b: 0, c: 0 };
+
+  function toggle(el, section) {
+    const isChecked = el.classList.contains('checked');
+    el.classList.toggle('checked');
+    counts[section] += isChecked ? -1 : 1;
+    updateUI();
+  }
+
+  function updateUI() {
+    const a = counts.a, b = counts.b, c = counts.c;
+
+    // カウント更新
+    document.getElementById('count-a').textContent = a;
+    document.getElementById('count-b').textContent = b;
+    document.getElementById('count-c').textContent = c;
+
+    // バー更新
+    document.getElementById('bar-a').style.width = (a / 5 * 100) + '%';
+    document.getElementById('bar-b').style.width = (b / 5 * 100) + '%';
+    document.getElementById('bar-c').style.width = (c / 5 * 100) + '%';
+    document.getElementById('bar-num-a').textContent = a + ' / 5';
+    document.getElementById('bar-num-b').textContent = b + ' / 5';
+    document.getElementById('bar-num-c').textContent = c + ' / 5';
+
+    // 診断結果
+    const total = a + b + c;
+    const pending = document.getElementById('pending-msg');
+    const cards = ['a','b','c','mixed'];
+    cards.forEach(id => document.getElementById('result-' + id).classList.remove('show'));
+
+    if (total === 0) {
+      pending.style.display = 'block';
+      return;
+    }
+
+    pending.style.display = 'none';
+    const max = Math.max(a, b, c);
+
+    if (a === max && a > b && a > c) {
+      document.getElementById('result-a').classList.add('show');
+    } else if (b === max && b > a && b > c) {
+      document.getElementById('result-b').classList.add('show');
+    } else if (c === max && c > a && c > b) {
+      document.getElementById('result-c').classList.add('show');
+    } else {
+      document.getElementById('result-mixed').classList.add('show');
+    }
+  }
+</script>
+</body>
+</html>
